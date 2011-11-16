@@ -16,18 +16,20 @@ return array(
 	'import'=>array(
 		'application.models.*',
 		'application.components.*',
+    'ext.giix-components.*', // giix components
 	),
 
 	'modules'=>array(
 		// uncomment the following to enable the Gii tool
-		/*
 		'gii'=>array(
 			'class'=>'system.gii.GiiModule',
-			'password'=>'Enter Your Password Here',
+      'generatorPaths' => array(
+        'ext.giix-core', // giix generators
+      ),
+			'password'=>'none',
 		 	// If removed, Gii defaults to localhost only. Edit carefully to taste.
 			'ipFilters'=>array('127.0.0.1','::1'),
 		),
-		*/
 	),
 
 	// application components
