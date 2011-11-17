@@ -9,9 +9,13 @@ class FeatureRequestModule extends CWebModule
 
 		// import the module-level models and components
 		$this->setImport(array(
-			'featureRequest.models.*',
-			'featureRequest.components.*',
+			'featureRequests.models.*',
+			'featureRequests.components.*',
 		));
+    
+    $this->defaultController = 'features';
+    $this->layoutPath = dirname(__FILE__).'/views/layouts';
+    $this->layout = '/layouts/main';
 	}
 
 	public function beforeControllerAction($controller, $action)
