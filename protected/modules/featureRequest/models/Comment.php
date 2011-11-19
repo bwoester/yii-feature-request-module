@@ -1,6 +1,6 @@
 <?php
 
-Yii::import('application.models._base.BaseComment');
+Yii::import( '_featureRequests.models._base.BaseComment', true );
 
 class Comment extends BaseComment
 {

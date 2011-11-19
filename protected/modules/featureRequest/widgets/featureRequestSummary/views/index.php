@@ -13,10 +13,16 @@
           array('label'=>'2 votes', 'url'=>array('')),
           array('label'=>'3 votes', 'url'=>array('')),
         )),
+				array('label'=>'Admin', 'items'=>array(
+          array('label'=>'Accept' , 'url'=>array('')),
+          array('label'=>'Reject', 'url'=>array('')),
+        )),
       )
 		)); ?>
 	</div><!-- featureRequestActions -->  
-  
+
+  <h3 class="featureRequest-title">My idea</h3>
+
 	<div class="featureRequest-content">
     Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy
     eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam

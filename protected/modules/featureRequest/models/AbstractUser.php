@@ -1,6 +1,6 @@
 <?php
 
-Yii::import('application.models._base.BaseAbstractUser');
+Yii::import( '_featureRequests.models._base.BaseAbstractUser', true );
 
 class AbstractUser extends BaseAbstractUser
 {

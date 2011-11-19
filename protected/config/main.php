@@ -32,6 +32,7 @@ return array(
 		),
     'featureRequests'=>array(
       'class'=>'application.modules.featureRequest.featureRequestModule',
+      'layout'=>'//layouts/column1',
     ),
 	),
 

@@ -1,5 +1,6 @@
 <?php
-$this->breadcrumbs = array( 'Feature requests' );
+
+$model = new FeatureRequest();
 
 for ($i=0; $i<5; $i++)
 {

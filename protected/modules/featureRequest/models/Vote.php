@@ -1,6 +1,6 @@
 <?php
 
-Yii::import('application.models._base.BaseVote');
+Yii::import( '_featureRequests.models._base.BaseVote', true );
 
 class Vote extends BaseVote
 {

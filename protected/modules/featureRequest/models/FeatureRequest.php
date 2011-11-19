@@ -1,6 +1,6 @@
 <?php
 
-Yii::import('application.models._base.BaseFeatureRequest');
+Yii::import( '_featureRequests.models._base.BaseFeatureRequest', true );
 
 class FeatureRequest extends BaseFeatureRequest
 {

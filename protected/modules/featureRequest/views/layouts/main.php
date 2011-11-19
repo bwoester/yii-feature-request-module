@@ -1,4 +1,9 @@
-<?php $this->beginContent('//layouts/column1'); ?>
+<?php
+
+/* @var $this FeatureRequestsBaseController */
+$this->beginContent( $this->getModule()->layout );
+
+?>
 
   <div id="searchFeatureRequestContainer">
   <?php $this->widget('zii.widgets.jui.CJuiAutoComplete', array(

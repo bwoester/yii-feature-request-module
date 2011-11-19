@@ -1,6 +1,6 @@
 <?php
 
-Yii::import('application.models._base.BaseAbstractMessage');
+Yii::import( '_featureRequests.models._base.BaseAbstractMessage', true );
 
 class AbstractMessage extends BaseAbstractMessage
 {
