@@ -1,0 +1,27 @@
+@mixin border-radius( $tl: "", $tr: "", $br: "", $bl: "" )
+{
+  @if $tl != "" {
+    -webkit-border-top-left-radius: $tl;
+    -moz-border-radius-topleft:     $tl;
+    border-top-left-radius:         $tl;
+  }
+
+  @if $tr != "" {
+    -webkit-border-top-right-radius:  $tr;
+    -moz-border-radius-topright:      $tr;
+    border-top-right-radius:          $tr;
+  }
+
+  @if $br != "" {
+    -webkit-border-bottom-right-radius: $br;
+    -moz-border-radius-bottomright:     $br;
+    border-bottom-right-radius:         $br;
+  }
+
+  @if $bl != "" {
+    -webkit-border-bottom-left-radius:  $bl;
+    -moz-border-radius-bottomleft:      $bl;
+    border-bottom-left-radius:          $bl;
+  }
+
+}

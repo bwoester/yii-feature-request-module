@@ -1,0 +1,54 @@
+/**
+ * @param $topColorString string like '#ff0000' - must be a string, don't omit
+ *        the quotes
+ * @param $bottomColorString string like '#ff0000' - must be a string, don't omit
+ *        the quotes
+ */
+@mixin simpleGradient( $topColorString, $bottomColorString )
+{
+  $topColor:    unquote($topColorString);
+  $bottomColor: unquote($bottomColorString);
+
+  /* FF3.6+ */
+  background: -moz-linear-gradient( top,
+    $topColor 0%,
+    $bottomColor 100%
+  );
+
+  /* Chrome,Safari4+ */
+  background: -webkit-gradient( linear, left top, left bottom,
+    color-stop(0%,$topColor),
+    color-stop(100%,$bottomColor)
+  );
+
+  /* Chrome10+,Safari5.1+ */
+  background: -webkit-linear-gradient( top,
+    $topColor 0%,
+    $bottomColor 100%
+  );
+
+  /* Opera 11.10+ */
+  background: -o-linear-gradient( top,
+    $topColor 0%,
+    $bottomColor 100%
+  );
+
+  /* IE10+ */
+  background: -ms-linear-gradient( top,
+    $topColor 0%,
+    $bottomColor 100%
+  );
+
+  /* W3C */
+  background: linear-gradient( top,
+    $topColor 0%,
+    $bottomColor 100%
+  );
+
+  /* IE6-9 */
+  filter: progid:DXImageTransform.Microsoft.gradient(
+    startColorstr='#{$topColor}',
+    endColorstr='#{$bottomColor}',
+    GradientType=0
+  );
+}

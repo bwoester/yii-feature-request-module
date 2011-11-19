@@ -1,0 +1,10 @@
+@import "actionMenu";
+@import "button";
+
+.featureRequest-actions > ul {
+  @include actionMenu;
+}
+
+.featureRequest-actions > ul li a {
+  @include button( white, medium );
+}

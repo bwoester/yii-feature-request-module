@@ -1,0 +1,109 @@
+@import "borderRadius";
+
+// should be applied to an UL
+@mixin actionMenu
+{
+  $menuWidth: 65px;
+  $menuBackgroundColor: #AAA;
+  $submenuBackgroundColor: $menuBackgroundColor;
+  $hoveredMenuItemBackgroundColor: $menuBackgroundColor;
+  $activeMenuItemBackgroundColor: $menuBackgroundColor;
+
+  float:       left;
+  padding:     0;
+  margin:      3px 0 0 0;
+  list-style:  none;
+  position:    relative;
+  width:       $menuWidth;
+
+  li
+  {
+    float:            left;
+    background-color: $menuBackgroundColor;
+    z-index:          200;
+
+    &:first-child {
+      @include border-radius( 5px, 5px );
+    }
+
+    &:last-child {
+      @include border-radius( "", "", 5px, 5px );
+    }
+
+    a
+    {
+      display:         block;
+      float:           left;
+      width:           $menuWidth;
+      height:          3em;  /* make the menu entries bigger */
+      line-height:     3em;  /* and center them vertically */
+      text-decoration: none;
+    }
+
+    span
+    {
+      display:      block;
+      float:        left;
+      width:        $menuWidth;
+      height:       3em;  /* make the menu entries bigger */
+      line-height:  3em;  /* and center them vertically */
+      text-align:   center;
+    }
+
+  }
+
+  ul
+  {
+    padding:    0;
+    margin:     0;
+    list-style: none;
+    width:      $menuWidth;
+    height:     auto;
+    position:   absolute;
+    left:       -9999px;
+    top:        0;
+
+    li
+    {
+      padding-left:   3px;
+      padding-top:    3px;
+      padding-right:  3px;
+
+      &:first-child {
+        @include border-radius( 0px, 5px, 0px, 0px );
+      }
+
+      &:last-child {
+        padding-bottom:  3px;
+        @include border-radius( 0px, 0px, 5px, 5px );
+      }
+    }
+  }
+
+  // --- hovering -------------------------------------------------------------
+
+  > li:hover
+  {
+    position: relative;
+
+    @include border-radius( 0px, 0px, 0px, 0px );
+
+    &:first-child {
+      @include border-radius( 5px );
+    }
+
+    &:last-child {
+      @include border-radius( "", "", "", 5px );
+    }
+
+    span
+    {
+      margin-right: 5px;
+    }
+  }
+
+  :hover ul
+  {
+    left: $menuWidth + 5px;
+  }
+}

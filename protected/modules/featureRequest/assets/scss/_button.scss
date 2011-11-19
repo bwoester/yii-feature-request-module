@@ -1,0 +1,308 @@
+/*****************************************************************************
+ * From "http://webdesignerwall.com/tutorials/css3-gradient-buttons"         *
+ *****************************************************************************/
+
+@import "simpleGradient";
+
+/**
+ * @param $style black|gray|white|orange|red|blue|rosy|green|pink
+ * @param $size  big|bigrounded|medium|small
+ */
+@mixin button( $style: white, $size: big )
+{
+	display: inline-block;
+	outline: none;
+	cursor: pointer;
+	text-align: center;
+	text-decoration: none;
+	padding: .5em 2em .55em;
+	text-shadow: 0 1px 1px rgba(0,0,0,.3);
+	-webkit-border-radius: .5em;
+	-moz-border-radius: .5em;
+	border-radius: .5em;
+	-webkit-box-shadow: 0 1px 2px rgba(0,0,0,.2);
+	-moz-box-shadow: 0 1px 2px rgba(0,0,0,.2);
+	box-shadow: 0 1px 2px rgba(0,0,0,.2);
+
+  &:hover {
+    text-decoration: none;
+  }
+
+  &:active {
+    position: relative;
+    top: 1px;
+  }
+
+  @if $style == black
+  {
+    @include button-style-black;
+  }
+  @else if $style == gray
+  {
+    @include button-style-gray;
+  }
+  @else if $style == white
+  {
+    @include button-style-white;
+  }
+  @else if $style == orange
+  {
+    @include button-style-orange;
+  }
+  @else if $style == red
+  {
+    @include button-style-red;
+  }
+  @else if $style == blue
+  {
+    @include button-style-blue;
+  }
+  @else if $style == rosy
+  {
+    @include button-style-rosy;
+  }
+  @else if $style == green
+  {
+    @include button-style-green;
+  }
+  @else if $style == pink
+  {
+    @include button-style-pink;
+  }
+
+  @if $size == big
+  {
+    @include button-size-big;
+  }
+  @else if $size == bigrounded
+  {
+    @include button-size-bigrounded;
+  }
+  @else if $size == medium
+  {
+    @include button-size-medium;
+  }
+  @else if $size == small
+  {
+    @include button-size-small;
+  }
+
+}
+
+
+/* button sizes
+---------------------------------------------- */
+
+@mixin button-size-big {
+}
+
+@mixin button-size-bigrounded {
+	-webkit-border-radius: 2em;
+	-moz-border-radius: 2em;
+	border-radius: 2em;
+}
+
+@mixin button-size-medium {
+	font-size: 12px;
+	padding: .4em 1.5em .42em;
+}
+
+@mixin button-size-small {
+	font-size: 11px;
+	padding: .2em 1em .275em;
+}
+
+
+
+/* color styles
+---------------------------------------------- */
+
+/* generic */
+@mixin button-style-generic(
+  $color,
+  $borderColor,
+  $backgroundColorTop,
+  $backgroundColorBottom,
+  $color-active: '',
+  $color-hover: '',
+  $borderColor-active: '',
+  $borderColor-hover: '',
+  $backgroundColorTop-active: '',
+  $backgroundColorTop-hover: '',
+  $backgroundColorBottom-active: '',
+  $backgroundColorBottom-hover: ''
+) {
+  @include simpleGradient( $backgroundColorTop, $backgroundColorBottom );
+
+	color:  $color;
+	border: solid 1px $borderColor;
+
+  &:hover {
+    @if $backgroundColorTop-hover == '' {
+      $backgroundColorTop-hover: $backgroundColorTop;
+    }
+
+    @if $backgroundColorBottom-hover == '' {
+      $backgroundColorBottom-hover: $backgroundColorBottom;
+    }
+
+    @if $color-hover == '' {
+      $color-hover: $color;
+    }
+
+    @include simpleGradient( $backgroundColorTop-hover, $backgroundColorBottom-hover );
+    color: $color-hover;
+  }
+
+  &:active {
+    @if $backgroundColorTop-active == '' {
+      $backgroundColorTop-active: $backgroundColorBottom;
+    }
+
+    @if $backgroundColorBottom-active == '' {
+      $backgroundColorBottom-active: $backgroundColorTop;
+    }
+
+    @if $color-active == '' {
+      $color-active: $color;
+    }
+
+    @include simpleGradient( $backgroundColorTop-active, $backgroundColorBottom-active );
+    color: $color-active;
+  }
+}
+
+/* black */
+@mixin button-style-black {
+  @include button-style-generic(
+    $color: #d7d7d7,
+    $borderColor: #333,
+    $backgroundColorTop: '#666666',
+    $backgroundColorBottom: '#000000',
+    $color-active: #666,
+    $backgroundColorTop-hover: '#444444'
+  );
+}
+
+/* gray */
+@mixin button-style-gray {
+
+  @include button-style-generic(
+    $color: #e9e9e9,
+    $borderColor: #555,
+    $backgroundColorTop: '#888888',
+    $backgroundColorBottom: '#575757',
+    $backgroundColorTop-hover: '#757575',
+    $backgroundColorBottom-hover: '#4b4b4b'
+  );
+
+}
+
+/* white */
+@mixin button-style-white {
+
+  @include button-style-generic(
+    $color: #606060,
+    $borderColor: #b7b7b7,
+    $backgroundColorTop: '#ffffff',
+    $backgroundColorBottom: '#ededed',
+    $color-active: #999,
+    $backgroundColorBottom-hover: '#dcdcdc'
+  );
+
+}
+
+/* orange */
+@mixin button-style-orange {
+
+  @include button-style-generic(
+    $color: #fef4e9,
+    $borderColor: #da7c0c,
+    $backgroundColorTop: '#faa51a',
+    $backgroundColorBottom: '#f47a20',
+    $color-active: #fcd3a5,
+    $backgroundColorTop-hover: '#f88e11',
+    $backgroundColorBottom-hover: '#f06015'
+  )
+
+}
+
+/* red */
+@mixin button-style-red {
+
+  @include button-style-generic(
+    $color: #faddde,
+    $borderColor: #980c10,
+    $backgroundColorTop: '#ed1c24',
+    $backgroundColorBottom: '#aa1317',
+    $color-active: #de898c,
+    $backgroundColorTop-hover: '#c9151b',
+    $backgroundColorBottom-hover: '#a11115'
+  );
+
+}
+
+/* blue */
+@mixin button-style-blue {
+
+  @include button-style-generic(
+    $color: #d9eef7,
+    $borderColor: #0076a3,
+    $backgroundColorTop: '#00adee',
+    $backgroundColorBottom: '#0078a5',
+    $color-active: #80bed6,
+    $backgroundColorTop-hover: '#0095cc',
+    $backgroundColorBottom-hover: '#00678e'
+  );
+
+}
+
+/* rosy */
+@mixin button-style-rosy {
+
+  @include button-style-generic(
+    $color: #fae7e9,
+    $borderColor: #b73948,
+    $backgroundColorTop: '#f16c7c',
+    $backgroundColorBottom: '#bf404f',
+    $color-active: #dca4ab,
+    $backgroundColorTop-hover: '#cf5d6a',
+    $backgroundColorBottom-hover: '#a53845'
+  );
+
+}
+
+/* green */
+@mixin button-style-green {
+
+  @include button-style-generic(
+    $color: #e8f0de,
+    $borderColor: #538312,
+    $backgroundColorTop: '#7db72f',
+    $backgroundColorBottom: '#4e7d0e',
+    $color-active: #a9c08c,
+    $backgroundColorTop-hover: '#6b9d28',
+    $backgroundColorBottom-hover: '#436b0c'
+  );
+
+}
+
+/* pink */
+@mixin button-style-pink {
+
+  @include button-style-generic(
+    $color: #feeef5,
+    $borderColor: #d2729e,
+    $backgroundColorTop: '#feb1d3',
+    $backgroundColorBottom: '#f171ab',
+    $color-active: #f3c3d9,
+    $color-hover: '',
+    $borderColor-active: '',
+    $borderColor-hover: '',
+    $backgroundColorTop-active: '',
+    $backgroundColorTop-hover: '#f4aacb',
+    $backgroundColorBottom-active: '',
+    $backgroundColorBottom-hover: '#e86ca4'
+  );
+
+}
