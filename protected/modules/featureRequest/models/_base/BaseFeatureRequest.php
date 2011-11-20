@@ -46,7 +46,7 @@ abstract class BaseFeatureRequest extends GxActiveRecord {
 	public function relations() {
 		return array(
 			'id0' => array(self::BELONGS_TO, 'AbstractMessage', 'id'),
-			'votes' => array(self::HAS_MANY, 'Vote', 'featureRequest_nr'),
+			'votes' => array(self::HAS_MANY, 'Vote', 'feature_request_id'),
 		);
 	}
 

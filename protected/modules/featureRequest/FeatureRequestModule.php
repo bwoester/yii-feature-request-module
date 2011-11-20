@@ -24,8 +24,9 @@ class FeatureRequestModule extends CWebModule
 
 		// import the module-level models and components
 		$this->setImport(array(
-			'_featureRequests.models.*',
+			'_featureRequests.behaviors.*',
 			'_featureRequests.components.*',
+			'_featureRequests.models.*',
 		));
     
     /* @var $am CAssetManager */

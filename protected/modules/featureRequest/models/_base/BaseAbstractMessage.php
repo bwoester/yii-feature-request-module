@@ -13,7 +13,7 @@
  * @property string $title
  * @property string $content
  * @property string $created_time
- * @property integer $abstractUser_id
+ * @property integer $abstract_user_id
  *
  * @property AbstractUser $abstractUser
  * @property Comment $comment
@@ -39,16 +39,16 @@ abstract class BaseAbstractMessage extends GxActiveRecord {
 
 	public function rules() {
 		return array(
-			array('title, content, created_time, abstractUser_id', 'required'),
-			array('abstractUser_id', 'numerical', 'integerOnly'=>true),
+			array('title, content, created_time, abstract_user_id', 'required'),
+			array('abstract_user_id', 'numerical', 'integerOnly'=>true),
 			array('title', 'length', 'max'=>45),
-			array('id, title, content, created_time, abstractUser_id', 'safe', 'on'=>'search'),
+			array('id, title, content, created_time, abstract_user_id', 'safe', 'on'=>'search'),
 		);
 	}
 
 	public function relations() {
 		return array(
-			'abstractUser' => array(self::BELONGS_TO, 'AbstractUser', 'abstractUser_id'),
+			'abstractUser' => array(self::BELONGS_TO, 'AbstractUser', 'abstract_user_id'),
 			'comment' => array(self::HAS_ONE, 'Comment', 'id'),
 			'featureRequest' => array(self::HAS_ONE, 'FeatureRequest', 'id'),
 		);
@@ -65,7 +65,7 @@ abstract class BaseAbstractMessage extends GxActiveRecord {
 			'title' => Yii::t('app', 'Title'),
 			'content' => Yii::t('app', 'Content'),
 			'created_time' => Yii::t('app', 'Created Time'),
-			'abstractUser_id' => null,
+			'abstract_user_id' => null,
 			'abstractUser' => null,
 			'comment' => null,
 			'featureRequest' => null,
@@ -79,7 +79,7 @@ abstract class BaseAbstractMessage extends GxActiveRecord {
 		$criteria->compare('title', $this->title, true);
 		$criteria->compare('content', $this->content, true);
 		$criteria->compare('created_time', $this->created_time, true);
-		$criteria->compare('abstractUser_id', $this->abstractUser_id);
+		$criteria->compare('abstract_user_id', $this->abstract_user_id);
 
 		return new CActiveDataProvider($this, array(
 			'criteria' => $criteria,

@@ -25,7 +25,9 @@
 		)); ?>
 	</div><!-- featureRequestActions -->  
 
-  <h3 class="featureRequest-title"><?php echo $this->model->message->title; ?></h3>
+  <h3 class="featureRequest-title"><?php
+    echo CHtml::link( $this->model->message->title, $this->model->getUrl() );
+  ?></h3>
 
 	<div class="featureRequest-content"><?php
     $this->beginWidget( 'CMarkdown', array('purifyOutput'=>true) );

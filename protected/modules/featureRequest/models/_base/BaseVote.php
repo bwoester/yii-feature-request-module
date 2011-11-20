@@ -11,11 +11,11 @@
  *
  * @property integer $id
  * @property integer $weight
- * @property integer $user_nr
- * @property integer $featureRequest_nr
+ * @property integer $abstract_user_id
+ * @property integer $feature_request_id
  *
- * @property AbstractUser $userNr
- * @property FeatureRequest $featureRequestNr
+ * @property AbstractUser $abstractUser
+ * @property FeatureRequest $featureRequest
  */
 abstract class BaseVote extends GxActiveRecord {
 
@@ -37,16 +37,16 @@ abstract class BaseVote extends GxActiveRecord {
 
 	public function rules() {
 		return array(
-			array('weight, user_nr, featureRequest_nr', 'required'),
-			array('weight, user_nr, featureRequest_nr', 'numerical', 'integerOnly'=>true),
-			array('id, weight, user_nr, featureRequest_nr', 'safe', 'on'=>'search'),
+			array('weight, abstract_user_id, feature_request_id', 'required'),
+			array('weight, abstract_user_id, feature_request_id', 'numerical', 'integerOnly'=>true),
+			array('id, weight, abstract_user_id, feature_request_id', 'safe', 'on'=>'search'),
 		);
 	}
 
 	public function relations() {
 		return array(
-			'userNr' => array(self::BELONGS_TO, 'AbstractUser', 'user_nr'),
-			'featureRequestNr' => array(self::BELONGS_TO, 'FeatureRequest', 'featureRequest_nr'),
+			'abstractUser' => array(self::BELONGS_TO, 'AbstractUser', 'abstract_user_id'),
+			'featureRequest' => array(self::BELONGS_TO, 'FeatureRequest', 'feature_request_id'),
 		);
 	}
 
@@ -59,10 +59,10 @@ abstract class BaseVote extends GxActiveRecord {
 		return array(
 			'id' => Yii::t('app', 'ID'),
 			'weight' => Yii::t('app', 'Weight'),
-			'user_nr' => null,
-			'featureRequest_nr' => null,
-			'userNr' => null,
-			'featureRequestNr' => null,
+			'abstract_user_id' => null,
+			'feature_request_id' => null,
+			'abstractUser' => null,
+			'featureRequest' => null,
 		);
 	}
 
@@ -71,8 +71,8 @@ abstract class BaseVote extends GxActiveRecord {
 
 		$criteria->compare('id', $this->id);
 		$criteria->compare('weight', $this->weight);
-		$criteria->compare('user_nr', $this->user_nr);
-		$criteria->compare('featureRequest_nr', $this->featureRequest_nr);
+		$criteria->compare('abstract_user_id', $this->abstract_user_id);
+		$criteria->compare('feature_request_id', $this->feature_request_id);
 
 		return new CActiveDataProvider($this, array(
 			'criteria' => $criteria,

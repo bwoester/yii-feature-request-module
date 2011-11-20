@@ -7,6 +7,7 @@ Yii::import( '_featureRequests.models._base.BaseFeatureRequest', true );
  */
 class FeatureRequest extends BaseFeatureRequest
 {
+  const STATUS_NEW = 'NEW';
 
 	public static function model($className=__CLASS__) {
 		return parent::model($className);
@@ -49,6 +50,11 @@ class FeatureRequest extends BaseFeatureRequest
     }
 
     return $retVal;
+  }
+
+  public function getUrl()
+  {
+    return array( 'features/show', 'id' => $this->id );
   }
   
 }
