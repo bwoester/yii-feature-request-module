@@ -11,7 +11,7 @@
  *
  * @property integer $id
  *
- * @property Abstractmessage $id0
+ * @property AbstractMessage $id0
  */
 abstract class BaseComment extends GxActiveRecord {
 
@@ -41,7 +41,7 @@ abstract class BaseComment extends GxActiveRecord {
 
 	public function relations() {
 		return array(
-			'id0' => array(self::BELONGS_TO, 'Abstractmessage', 'id'),
+			'id0' => array(self::BELONGS_TO, 'AbstractMessage', 'id'),
 		);
 	}
 

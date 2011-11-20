@@ -1,7 +1,11 @@
+<?php
+/* @var $this FeatureRequestSummary */
+?>
+
 <div class="featureRequest-summary">
   
   <div class="featureRequest-votes">
-    <span class="counter">42</span>
+    <span class="counter"><?php echo $this->model->countVoteWeights(); ?></span>
     <span class="label">Votes</span>
   </div>
   
@@ -21,19 +25,13 @@
 		)); ?>
 	</div><!-- featureRequestActions -->  
 
-  <h3 class="featureRequest-title">My idea</h3>
+  <h3 class="featureRequest-title"><?php echo $this->model->message->title; ?></h3>
 
-	<div class="featureRequest-content">
-    Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy
-    eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam
-    voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet
-    clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit
-    amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
-    nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed
-    diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum.
-    Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor
-    sit amet.    
-  </div>
+	<div class="featureRequest-content"><?php
+    $this->beginWidget( 'CMarkdown', array('purifyOutput'=>true) );
+    echo $this->model->message->content;
+    $this->endWidget();
+  ?></div>
 
 	<div class="featureRequest-info">
 		<?php $this->widget('zii.widgets.CMenu',array(

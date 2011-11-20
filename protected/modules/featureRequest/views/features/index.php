@@ -1,9 +1,10 @@
 <?php
 
-$model = new FeatureRequest();
+$models = FeatureRequest::model()->findAll();
 
-for ($i=0; $i<5; $i++)
+foreach ($models as $model)
 {
   $this->widget( 'featureRequests.widgets.featureRequestSummary.FeatureRequestSummary', array(
+    'model' => $model,
   ));
 }

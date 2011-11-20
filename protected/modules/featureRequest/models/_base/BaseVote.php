@@ -14,8 +14,8 @@
  * @property integer $user_nr
  * @property integer $featureRequest_nr
  *
- * @property Abstractuser $userNr
- * @property Featurerequest $featureRequestNr
+ * @property AbstractUser $userNr
+ * @property FeatureRequest $featureRequestNr
  */
 abstract class BaseVote extends GxActiveRecord {
 
@@ -45,8 +45,8 @@ abstract class BaseVote extends GxActiveRecord {
 
 	public function relations() {
 		return array(
-			'userNr' => array(self::BELONGS_TO, 'Abstractuser', 'user_nr'),
-			'featureRequestNr' => array(self::BELONGS_TO, 'Featurerequest', 'featureRequest_nr'),
+			'userNr' => array(self::BELONGS_TO, 'AbstractUser', 'user_nr'),
+			'featureRequestNr' => array(self::BELONGS_TO, 'FeatureRequest', 'featureRequest_nr'),
 		);
 	}
 
