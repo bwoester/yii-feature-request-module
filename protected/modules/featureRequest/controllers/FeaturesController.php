@@ -10,10 +10,18 @@ class FeaturesController extends FeatureRequestsBaseController
     );
   }
 
-	public function actionIndex()
-	{
-		$this->render('index');
-	}
+  public function actionIndex()
+  {
+    $this->render('index');
+  }
+  
+  public function actionShow( $id )
+  {
+    $featureRequest = FeatureRequest::model()->findByPk( $id );
+    $this->render( 'show', array(
+      'featureRequest' => $featureRequest,
+    ));
+  }
   
   public function actionSearch()
   {
