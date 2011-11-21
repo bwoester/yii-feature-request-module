@@ -1,11 +1,11 @@
 <?php
-/* @var $this FeatureRequest */
+/* @var $this FeatureRequestWidget */
 ?>
 
 <div class="featureRequest">
   
   <div class="featureRequest-votes">
-    <span class="counter"><?php echo $this->model->countVoteWeights(); ?></span>
+    <span class="counter"><?php echo $this->model->voteWeightSum; ?></span>
     <span class="label">Votes</span>
   </div>
   

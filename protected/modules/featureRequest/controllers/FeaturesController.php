@@ -12,7 +12,10 @@ class FeaturesController extends FeatureRequestsBaseController
 
   public function actionIndex()
   {
-    $this->render('index');
+    $dataProvider = FeatureRequest::model()->getHighestRated();
+    $this->render( 'index', array(
+      'dataProvider' => $dataProvider,
+    ));
   }
   
   public function actionShow( $id )

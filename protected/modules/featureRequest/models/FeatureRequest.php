@@ -4,6 +4,7 @@ Yii::import( '_featureRequests.models._base.BaseFeatureRequest', true );
 
 /**
  * @property AbstractMessage $message
+ * @property int $voteWeightSum
  */
 class FeatureRequest extends BaseFeatureRequest
 {
@@ -24,6 +25,7 @@ class FeatureRequest extends BaseFeatureRequest
 	public function relations() {
 		return array_merge( parent::relations(), array(
       'message' => array(self::BELONGS_TO, 'AbstractMessage', 'id'),
+      'voteWeightSum' => array(self::STAT, 'Vote', 'feature_request_id', 'select' => 'sum(weight)'),
     ));
 	}
 
@@ -40,21 +42,24 @@ class FeatureRequest extends BaseFeatureRequest
     return $retVal;
 	}
 
-  public function countVoteWeights()
-  {
-    $retVal = 0;
-
-    /* @var $vote Vote */
-    foreach ($this->votes as $vote) {
-      $retVal += $vote->weight;
-    }
-
-    return $retVal;
-  }
-
   public function getUrl()
   {
     return array( 'features/show', 'id' => $this->id );
+  }
+  
+  public function getHighestRated()
+  {
+    $dataProvider = new CActiveDataProvider( 'FeatureRequest', array(
+      'criteria' => array(
+        //'order' => 't.voteWeightSum DESC',
+        'with'  => array( 'message', 'voteWeightSum' ),
+      ),
+      'pagination' => array(
+        'pageSize'=>10,
+      ),
+    ));
+    
+    return $dataProvider;
   }
   
 }

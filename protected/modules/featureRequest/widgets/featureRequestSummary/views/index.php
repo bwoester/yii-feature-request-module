@@ -5,7 +5,7 @@
 <div class="featureRequest-summary">
   
   <div class="featureRequest-votes">
-    <span class="counter"><?php echo $this->model->countVoteWeights(); ?></span>
+    <span class="counter"><?php echo $this->model->voteWeightSum; ?></span>
     <span class="label">Votes</span>
   </div>
   
