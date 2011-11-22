@@ -4,31 +4,28 @@
 @mixin actionMenu
 {
   $menuWidth: 65px;
-  $menuBackgroundColor: #AAA;
+  $menuBackgroundColor: #DDD;
   $submenuBackgroundColor: $menuBackgroundColor;
-  $hoveredMenuItemBackgroundColor: $menuBackgroundColor;
+  $hoveredMenuItemBackgroundColor: #CCC;
   $activeMenuItemBackgroundColor: $menuBackgroundColor;
+
+  @include border-radius( 5px, 5px, 5px, 5px );
 
   float:       left;
   padding:     0;
-  margin:      3px 0 0 0;
+  margin:      0;
   list-style:  none;
   position:    relative;
   width:       $menuWidth;
+  
+  background-color: $menuBackgroundColor;
 
   li
   {
-    float:            left;
-    background-color: $menuBackgroundColor;
-    z-index:          200;
+    float:    left;
+    z-index:  200;
 
-    &:first-child {
-      @include border-radius( 5px, 5px );
-    }
-
-    &:last-child {
-      @include border-radius( "", "", 5px, 5px );
-    }
+    @include border-radius( 5px, 5px, 5px, 5px );
 
     a
     {
@@ -44,12 +41,22 @@
     {
       display:      block;
       float:        left;
-      width:        $menuWidth;
+      width:        $menuWidth - 10px;
       height:       3em;  /* make the menu entries bigger */
       line-height:  3em;  /* and center them vertically */
       text-align:   center;
     }
 
+  }
+
+  > li
+  {
+    margin-left:  5px;
+    margin-top:   5px;
+
+    &:last-child {
+      margin-bottom: 5px;
+    }
   }
 
   ul
@@ -69,6 +76,8 @@
       padding-top:    3px;
       padding-right:  3px;
 
+      @include border-radius( 0px, 0px, 0px, 0px );
+
       &:first-child {
         @include border-radius( 0px, 5px, 0px, 0px );
       }
@@ -85,25 +94,23 @@
   > li:hover
   {
     position: relative;
-
-    @include border-radius( 0px, 0px, 0px, 0px );
-
-    &:first-child {
-      @include border-radius( 5px );
-    }
-
-    &:last-child {
-      @include border-radius( "", "", "", 5px );
-    }
+    
+    background-color: $hoveredMenuItemBackgroundColor;
+    @include border-radius( 5px, 0px, 0px, 5px );
 
     span
     {
-      margin-right: 5px;
+      margin-right: 10px;
+    }
+
+    li
+    {
+      background-color: $hoveredMenuItemBackgroundColor;
     }
   }
 
   :hover ul
   {
-    left: $menuWidth + 5px;
+    left: $menuWidth;
   }
 }

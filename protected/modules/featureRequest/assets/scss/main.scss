@@ -1,10 +1,14 @@
 @import "actionMenu";
 @import "button";
 
+.featureRequest-summary {
+  min-height: 100px;
+}
+
 .featureRequest-actions > ul {
   @include actionMenu;
 }
 
 .featureRequest-actions > ul li a {
-  @include button( white, medium );
+  @include button( white, small );
 }
