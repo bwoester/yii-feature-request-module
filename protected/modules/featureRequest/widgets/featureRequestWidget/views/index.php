@@ -36,12 +36,15 @@
   ?></div>
 
 	<div class="featureRequest-info">
-		<?php $this->widget('zii.widgets.CMenu',array(
-			'items'=>array(
-        array('label'=>'by {TODO: link to author profile}' , 'url'=>array('')),
-        array('label'=>'{TODO: link to show comments}', 'url'=>array('')),
-      )
-		)); ?>
+		<?php
+      // TODO: implement comments, user profiles, ...
+//    $this->widget('zii.widgets.CMenu',array(
+//			'items'=>array(
+//        array('label'=>'by {TODO: link to author profile}' , 'url'=>array('')),
+//        array('label'=>'{TODO: link to show comments}', 'url'=>array('')),
+//      )
+//		));
+    ?>
 	</div><!-- featureRequestActions -->  
   
   

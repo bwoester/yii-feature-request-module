@@ -46,22 +46,34 @@ class FeaturesController extends FeatureRequestsBaseController
     {
       /* @var $abstractUser AbstractUser */
       $abstractUser = $this->getAbstractUser();
+      
+      $valid = $abstractUser instanceof AbstractUser;
 
-      $featureRequest->message->attributes = $_POST['AbstractMessage'];
-      $featureRequest->message->abstract_user_id = $abstractUser->id;
-      /* $featureRequest->attributes = $_POST['FeatureRequest']; */
-      $featureRequest->status = FeatureRequest::STATUS_NEW;
-      $featureRequest->save();
-
-      $vote->attributes = $_POST['Vote'];
-      $vote->abstract_user_id = $abstractUser->id;
-      $vote->feature_request_id = $featureRequest->id;
-      $vote->save();
-
-      $this->redirect( $featureRequest->getUrl() );
+      if ($valid)
+      {
+        $featureRequest->message->attributes = $_POST['AbstractMessage'];
+        $featureRequest->message->abstract_user_id = $abstractUser->id;
+        /* $featureRequest->attributes = $_POST['FeatureRequest']; */
+        $featureRequest->status = FeatureRequest::STATUS_NEW;
+        
+        $valid = $featureRequest->save();
+      }
+      
+      if ($valid)
+      {
+        $vote->attributes = $_POST['Vote'];
+        $vote->abstract_user_id = $abstractUser->id;
+        $vote->feature_request_id = $featureRequest->id;
+        
+        $valid = $vote->save();
+      }
+      
+      if ($valid) {
+        $this->redirect( $featureRequest->getUrl() );
+      }
     }
     // pre-fill title
-    else if (isset($_POST['featureRequestTitle']))
+    else if (isset($_POST['featureRequestTitle']) && $_POST['featureRequestTitle'] !== '')
     {
       $featureRequest->message->title = $_POST['featureRequestTitle'];
       $featureRequest->message->validate( array('title') );
