@@ -9,6 +9,9 @@ Yii::import( '_featureRequests.models._base.BaseFeatureRequest', true );
 class FeatureRequest extends BaseFeatureRequest
 {
   const STATUS_NEW = 'NEW';
+  
+  // Only available for withVoteWeightSum():
+  //public $voteWeightSum = 0;
 
 	public static function model($className=__CLASS__) {
 		return parent::model($className);
@@ -28,6 +31,20 @@ class FeatureRequest extends BaseFeatureRequest
       'voteWeightSum' => array(self::STAT, 'Vote', 'feature_request_id', 'select' => 'sum(weight)'),
     ));
 	}
+  
+  // Named scope that populates $voteWeightSum vars
+  public function withVoteWeightSum( $orderby=null )
+  {
+    $criteria = $this->getDbCriteria();
+    $criteria->select = array( '*', 'SUM(v.weight) AS voteWeightSum' );
+    $criteria->join = 'LEFT JOIN vote AS v ON (t.id = v.feature_request_id)';
+    
+    if ($orderby!==null) {
+      $criteria->order = $orderby;
+    }
+    
+    return $this;
+  }
 
 	public function save($runValidation=true,$attributes=null)
 	{
@@ -49,13 +66,16 @@ class FeatureRequest extends BaseFeatureRequest
   
   public function getHighestRated()
   {
-    $dataProvider = new CActiveDataProvider( 'FeatureRequest', array(
-      'criteria' => array(
-        //'order' => 't.voteWeightSum DESC',
-        'with'  => array( 'message', 'voteWeightSum' ),
+    $dataProvider = new CActiveDataProvider( get_class($this), array(
+      'criteria'  => array(
+        'select'  => 't.*, sum(votes.weight) as voteWeightSum',
+        'with'    => array( 'message', 'votes' ),
+        'together'=> true,
+        'order'   => 'voteWeightSum DESC',
+        'group'   => 't.id',
       ),
       'pagination' => array(
-        'pageSize'=>10,
+        'pageSize' => 10,
       ),
     ));
     
