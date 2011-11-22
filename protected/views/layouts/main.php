@@ -26,14 +26,18 @@
 	</div><!-- header -->
 
 	<div id="mainmenu">
-		<?php $this->widget('zii.widgets.CMenu',array(
+		<?php
+    $userModule = Yii::app()->getModule( 'user' );
+    $this->widget('zii.widgets.CMenu',array(
 			'items'=>array(
 				array('label'=>'Home', 'url'=>array('/site/index')),
 				array('label'=>'About', 'url'=>array('/site/page', 'view'=>'about')),
 				array('label'=>'Contact', 'url'=>array('/site/contact')),
 				array('label'=>'Feature Requests', 'url'=>array('/featureRequests/features')),
-				array('label'=>'Login', 'url'=>array('/site/login'), 'visible'=>Yii::app()->user->isGuest),
-				array('label'=>'Logout ('.Yii::app()->user->name.')', 'url'=>array('/site/logout'), 'visible'=>!Yii::app()->user->isGuest)
+        array('url'=>$userModule->loginUrl, 'label'=>$userModule->t("Login"), 'visible'=>Yii::app()->user->isGuest),
+        array('url'=>$userModule->registrationUrl, 'label'=>$userModule->t("Register"), 'visible'=>Yii::app()->user->isGuest),
+        array('url'=>$userModule->profileUrl, 'label'=>$userModule->t("Profile"), 'visible'=>!Yii::app()->user->isGuest),
+        array('url'=>$userModule->logoutUrl, 'label'=>$userModule->t("Logout").' ('.Yii::app()->user->name.')', 'visible'=>!Yii::app()->user->isGuest),            
 			),
 		)); ?>
 	</div><!-- mainmenu -->
