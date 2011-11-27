@@ -1,8 +1,47 @@
 @import "actionMenu";
+@import "borderRadius";
 @import "button";
 
 .featureRequest-summary {
-  min-height: 100px;
+  margin-bottom: 20px;  
+
+  &:after {
+    content: ".";
+    display: block;
+    height: 0;
+    clear: both;
+    visibility: hidden;
+  }
+}
+
+.featureRequest-sidebar {
+  float: left;
+}
+
+.featureRequest-main-area {
+  margin-left: 80px;
+}
+
+.featureRequest-votes {
+  @include border-radius( 5px, 5px, 5px, 5px );
+  display: inline-block;
+  border: 1px solid #CCC;
+  min-width: 63px;
+  text-align: center;
+  padding-top: 3px;
+  padding-bottom: 3px;
+  margin-bottom: 10px;
+
+  .counter {
+    display: block;
+    font-size: 1.8em;
+    font-weight: bold;
+  }
+
+  .label {
+    display: block;
+    font-size: 0.7em;
+  }
 }
 
 .featureRequest-actions > ul {

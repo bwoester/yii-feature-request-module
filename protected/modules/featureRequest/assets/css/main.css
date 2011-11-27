@@ -26,7 +26,47 @@
 /* green */
 /* pink */
 .featureRequest-summary {
-  min-height: 100px; }
+  margin-bottom: 20px; }
+  .featureRequest-summary:after {
+    content: ".";
+    display: block;
+    height: 0;
+    clear: both;
+    visibility: hidden; }
+
+.featureRequest-sidebar {
+  float: left; }
+
+.featureRequest-main-area {
+  margin-left: 80px; }
+
+.featureRequest-votes {
+  -webkit-border-top-left-radius: 5px;
+  -moz-border-radius-topleft: 5px;
+  border-top-left-radius: 5px;
+  -webkit-border-top-right-radius: 5px;
+  -moz-border-radius-topright: 5px;
+  border-top-right-radius: 5px;
+  -webkit-border-bottom-right-radius: 5px;
+  -moz-border-radius-bottomright: 5px;
+  border-bottom-right-radius: 5px;
+  -webkit-border-bottom-left-radius: 5px;
+  -moz-border-radius-bottomleft: 5px;
+  border-bottom-left-radius: 5px;
+  display: inline-block;
+  border: 1px solid #CCC;
+  min-width: 63px;
+  text-align: center;
+  padding-top: 3px;
+  padding-bottom: 3px;
+  margin-bottom: 10px; }
+  .featureRequest-votes .counter {
+    display: block;
+    font-size: 1.8em;
+    font-weight: bold; }
+  .featureRequest-votes .label {
+    display: block;
+    font-size: 0.7em; }
 
 .featureRequest-actions > ul {
   -webkit-border-top-left-radius: 5px;
