@@ -12,6 +12,9 @@ class LazyLoadAbstractUserBehavior extends CBehavior
 {
   private $_abstractUser = null;
 
+  /**
+   * @return AbstractUser
+   */
   public function getAbstractUser()
   {
     if (!$this->_abstractUser instanceof AbstractUser)

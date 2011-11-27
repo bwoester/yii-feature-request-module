@@ -5,17 +5,26 @@ Yii::import( '_featureRequests.models._base.BaseFeatureRequest', true );
 /**
  * @property AbstractMessage $message
  * @property int $voteWeightSum
+ * @property Vote $userVote
  */
 class FeatureRequest extends BaseFeatureRequest
 {
   const STATUS_NEW = 'NEW';
   
-  // Only available for withVoteWeightSum():
-  //public $voteWeightSum = 0;
-
+  /**
+   * @param string $className
+   * @return FeatureRequest
+   */
 	public static function model($className=__CLASS__) {
 		return parent::model($className);
 	}
+
+  public function behaviors()
+  {
+		return array_merge( parent::behaviors(), array(
+      'lazyLoadAbstractUser' => 'LazyLoadAbstractUserBehavior',
+    ));
+  }
 
   public function init()
   {
@@ -31,20 +40,6 @@ class FeatureRequest extends BaseFeatureRequest
       'voteWeightSum' => array(self::STAT, 'Vote', 'feature_request_id', 'select' => 'sum(weight)'),
     ));
 	}
-  
-  // Named scope that populates $voteWeightSum vars
-  public function withVoteWeightSum( $orderby=null )
-  {
-    $criteria = $this->getDbCriteria();
-    $criteria->select = array( '*', 'SUM(v.weight) AS voteWeightSum' );
-    $criteria->join = 'LEFT JOIN vote AS v ON (t.id = v.feature_request_id)';
-    
-    if ($orderby!==null) {
-      $criteria->order = $orderby;
-    }
-    
-    return $this;
-  }
 
 	public function save($runValidation=true,$attributes=null)
 	{
@@ -80,6 +75,26 @@ class FeatureRequest extends BaseFeatureRequest
     ));
     
     return $dataProvider;
+  }
+
+  public function getUserVote()
+  {
+    if ($this->getIsNewRecord()) {
+      throw new CException( "Can't get user vote of feature request that isn't yet saved!" );
+    }
+
+    $vote = Vote::model()->fromUser()->find( 'feature_request_id = :id', array(
+      ':id' => $this->id,
+    ));
+
+    if (!$vote instanceof Vote)
+    {
+      $vote = new Vote();
+      $vote->abstract_user_id = $this->getAbstractUser()->id;
+      $vote->feature_request_id = $this->id;
+    }
+
+    return $vote;
   }
   
 }

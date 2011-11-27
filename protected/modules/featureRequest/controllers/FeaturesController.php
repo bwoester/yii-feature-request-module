@@ -1,7 +1,13 @@
 <?php
 
+/**
+ *
+ * @property-read AbstractUser $abstractUser
+ */
 class FeaturesController extends FeatureRequestsBaseController
 {
+
+  /////////////////////////////////////////////////////////////////////////////
 
   public function behaviors()
   {
@@ -10,6 +16,8 @@ class FeaturesController extends FeatureRequestsBaseController
     );
   }
 
+  /////////////////////////////////////////////////////////////////////////////
+
   public function actionIndex()
   {
     $dataProvider = FeatureRequest::model()->getHighestRated();
@@ -17,7 +25,9 @@ class FeaturesController extends FeatureRequestsBaseController
       'dataProvider' => $dataProvider,
     ));
   }
-  
+
+  /////////////////////////////////////////////////////////////////////////////
+
   public function actionShow( $id )
   {
     $featureRequest = FeatureRequest::model()->findByPk( $id );
@@ -25,7 +35,9 @@ class FeaturesController extends FeatureRequestsBaseController
       'featureRequest' => $featureRequest,
     ));
   }
-  
+
+  /////////////////////////////////////////////////////////////////////////////
+
   public function actionSearch()
   {
     $result = array(
@@ -36,6 +48,38 @@ class FeaturesController extends FeatureRequestsBaseController
     echo CJSON::encode( $result );
   }
 
+  /////////////////////////////////////////////////////////////////////////////
+
+  public function actionVote()
+  {
+    if (!isset($_POST['featureRequestId']) || !isset($_POST['voteWeight'])) {
+      throw new CHttpException( 400, 'Your request is invalid.' );
+    }
+
+    $featureRequest = FeatureRequest::model()->findByPk( $_POST['featureRequestId'] );
+
+    if ($featureRequest instanceof FeatureRequest)
+    {
+      $vote = $featureRequest->userVote;
+      $vote->weight = $_POST['voteWeight'];
+      
+      if ($vote->save()) {
+        Yii::app()->user->setFlash( 'voted', 'Your vote has been saved.' );
+      }
+    }
+    else {
+      throw new CHttpException( 404, 'Feature request not found.' );
+    }
+
+    // display the feature request detail view after voting
+    $this->render( 'show', array(
+      'featureRequest'  => $featureRequest,
+      'vote'            => $vote,
+    ));
+  }
+
+  /////////////////////////////////////////////////////////////////////////////
+
   public function actionCreate()
   {
     $featureRequest = new FeatureRequest();
@@ -44,32 +88,46 @@ class FeaturesController extends FeatureRequestsBaseController
     // create new feature request and redirect to it
     if ( /* isset($_POST['FeatureRequest']) && */ isset($_POST['AbstractMessage']) && isset($_POST['Vote']))
     {
-      /* @var $abstractUser AbstractUser */
-      $abstractUser = $this->getAbstractUser();
-      
-      $valid = $abstractUser instanceof AbstractUser;
+      $abstractUser = $this->abstractUser;
+      /* @var $transaction CDbTransaction */
+      $transaction = $abstractUser->dbConnection->beginTransaction();
 
-      if ($valid)
+      try
       {
-        $featureRequest->message->attributes = $_POST['AbstractMessage'];
-        $featureRequest->message->abstract_user_id = $abstractUser->id;
-        /* $featureRequest->attributes = $_POST['FeatureRequest']; */
-        $featureRequest->status = FeatureRequest::STATUS_NEW;
-        
-        $valid = $featureRequest->save();
+        $valid = $abstractUser instanceof AbstractUser;
+
+        if ($valid)
+        {
+          $featureRequest->message->attributes = $_POST['AbstractMessage'];
+          $featureRequest->message->abstract_user_id = $abstractUser->id;
+          /* $featureRequest->attributes = $_POST['FeatureRequest']; */
+          $featureRequest->status = FeatureRequest::STATUS_NEW;
+
+          $valid = $featureRequest->save();
+        }
+
+        if ($valid)
+        {
+          $vote = $featureRequest->getUserVote();
+          $vote->attributes = $_POST['Vote'];
+
+          $valid = $vote->save();
+        }
+
+        if ($valid)
+        {
+          $transaction->commit();
+          Yii::app()->user->setFlash( 'featureRequestCreated', 'Your feature request has been saved.' );
+          $this->redirect( $featureRequest->getUrl() );
+        }
+        else
+        {
+          $transaction->rollBack();
+        }
       }
-      
-      if ($valid)
+      catch(Exception $e)
       {
-        $vote->attributes = $_POST['Vote'];
-        $vote->abstract_user_id = $abstractUser->id;
-        $vote->feature_request_id = $featureRequest->id;
-        
-        $valid = $vote->save();
-      }
-      
-      if ($valid) {
-        $this->redirect( $featureRequest->getUrl() );
+        $transaction->rollBack();
       }
     }
     // pre-fill title
@@ -85,5 +143,7 @@ class FeaturesController extends FeatureRequestsBaseController
       'vote' => $vote,
     ));
   }
+
+  /////////////////////////////////////////////////////////////////////////////
 
 }
