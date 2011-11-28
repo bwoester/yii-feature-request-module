@@ -57,21 +57,6 @@
           )),
         )
       )); ?>
-      <!--
-      <?php $this->widget('zii.widgets.CMenu',array(
-        'items'=>array(
-          array('label'=>'Vote', 'items'=>array(
-            array('label'=>'1 vote' , 'url'=>array('')),
-            array('label'=>'2 votes', 'url'=>array('')),
-            array('label'=>'3 votes', 'url'=>array('')),
-          )),
-          array('label'=>'Admin', 'items'=>array(
-            array('label'=>'Accept' , 'url'=>array('')),
-            array('label'=>'Reject', 'url'=>array('')),
-          )),
-        )
-      )); ?>
-      -->
     </div>
 
   </div>

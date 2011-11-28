@@ -45,13 +45,13 @@
 }
 
 .featureRequest-actions > ul {
-  // @include actionMenu;
+  @include actionMenu;
 }
 
 .featureRequest-actions > ul li a {
   @include button( white, medium );
 }
 
-.featureRequest-actions > ul li input {
+.featureRequest-actions > ul li div {
   @include button( white, medium );
 }

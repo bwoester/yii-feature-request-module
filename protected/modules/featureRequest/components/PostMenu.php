@@ -15,14 +15,14 @@ class PostMenu extends CMenu
       $route  = isset($item['url'][0]) ? $item['url'][0] : '';
       $params = isset($item['url'][1]) ? $item['url'][1] : array();
       
-      $html = CHtml::beginForm( $route );
+      $html = '<div>' . CHtml::beginForm( $route );
       
       foreach ($params as $key => $value) {
         $html .= CHtml::hiddenField( $key, $value );
       }
       
       $html .= CHtml::submitButton( $item['label'] );
-      $html .= CHtml::endForm();
+      $html .= CHtml::endForm() . '</div>';
       
       return $html;
     }

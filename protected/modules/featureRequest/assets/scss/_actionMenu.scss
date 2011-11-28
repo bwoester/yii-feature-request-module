@@ -28,23 +28,33 @@
     @include border-radius( 5px, 5px, 5px, 5px );
 
     a,
-    input
+    div,
+    span
     {
-      float:           left;
-      width:           $menuWidth;
-      height:          3em;  /* make the menu entries bigger */
-      line-height:     3em;  /* and center them vertically */
-      text-decoration: none;
+      display:          inline-block;
+      float:            left;
+      width:            $menuWidth;
+      // height:           3em;  /* make the menu entries bigger */
+      // line-height:      3em;  /* and center them vertically */
+      text-decoration:  none;
+      text-align:       center;
     }
 
     span
     {
-      display:      block;
-      float:        left;
+      // display:      block;
+      // float:        left;
       width:        $menuWidth - 10px;
-      height:       2em;  /* make the menu entries bigger */
-      line-height:  2em;  /* and center them vertically */
-      text-align:   center;
+      // height:       2em;  /* make the menu entries bigger */
+      // line-height:  2em;  /* and center them vertically */
+      // text-align:   center;
+    }
+
+    div input {
+      border: none;
+      width: 100%;
+      padding: 0px;
+      margin: 0px;
     }
 
   }
@@ -66,8 +76,8 @@
     list-style: none;
     width:      $menuWidth;
     height:     auto;
-    position:   absolute;
-    left:       -9999px;
+    //position:   absolute;
+    //left:       -9999px;
     top:        0;
 
     li
