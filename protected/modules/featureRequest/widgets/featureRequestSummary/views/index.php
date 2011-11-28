@@ -21,7 +21,7 @@
                 'label'   => '1 vote',
                 'method'  => PostMenu::POST,
                 'url'     => array(
-                  'route',
+                  'features/vote',
                   array(
                     'featureRequestId'  => $this->model->id,
                     'voteWeight'        => 1,
@@ -32,7 +32,7 @@
                 'label'   => '2 votes',
                 'method'  => PostMenu::POST,
                 'url'     => array(
-                  'route',
+                  'features/vote',
                   array(
                     'featureRequestId'  => $this->model->id,
                     'voteWeight'        => 2,
@@ -43,7 +43,7 @@
                 'label'   => '3 votes',
                 'method'  => PostMenu::POST,
                 'url'     => array(
-                  'route',
+                  'features/vote',
                   array(
                     'featureRequestId'  => $this->model->id,
                     'voteWeight'        => 3,
@@ -52,8 +52,26 @@
               ),
           )),
           array('label'=>'Admin', 'items'=>array(
-            array('label'=>'Accept' , 'url'=>array('')),
-            array('label'=>'Reject', 'url'=>array('')),
+            array(
+              'label'   => 'Accept',
+              'method'  => PostMenu::POST,
+              'url'     => array(
+                'route',
+                array(
+                  'featureRequestId'  => $this->model->id,
+                ),
+              ),
+            ),
+            array(
+              'label'   => 'Reject',
+              'method'  => PostMenu::POST,
+              'url'     => array(
+                'route',
+                array(
+                  'featureRequestId'  => $this->model->id,
+                ),
+              ),
+            ),
           )),
         )
       )); ?>

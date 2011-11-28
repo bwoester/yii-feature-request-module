@@ -12,7 +12,7 @@ class PostMenu extends CMenu
 		if (isset($item['url']) && is_array($item['url']) &&
         isset($item['method']) && $item['method'] === PostMenu::POST)
 		{
-      $route  = isset($item['url'][0]) ? $item['url'][0] : '';
+      $route  = isset($item['url'][0]) ? array($item['url'][0]) : '';
       $params = isset($item['url'][1]) ? $item['url'][1] : array();
       
       $html = '<div>' . CHtml::beginForm( $route );

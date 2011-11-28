@@ -52,6 +52,6 @@
   @include button( white, medium );
 }
 
-.featureRequest-actions > ul li div {
+.featureRequest-actions > ul li input[type=submit] {
   @include button( white, medium );
 }

@@ -103,21 +103,25 @@
     -webkit-border-bottom-left-radius: 5px;
     -moz-border-radius-bottomleft: 5px;
     border-bottom-left-radius: 5px; }
-    .featureRequest-actions > ul li a,
-    .featureRequest-actions > ul li div,
     .featureRequest-actions > ul li span {
       display: inline-block;
       float: left;
-      width: 65px;
+      width: 55px;
+      text-align: center;
+      height: 2em;
+      line-height: 2em; }
+    .featureRequest-actions > ul li div {
+      padding: 0px;
+      margin: 0px;
+      min-width: 6em; }
+      .featureRequest-actions > ul li div input[type="submit"] {
+        margin: 0px;
+        width: 100%; }
+    .featureRequest-actions > ul li a {
+      display: inline-block;
+      float: left;
       text-decoration: none;
       text-align: center; }
-    .featureRequest-actions > ul li span {
-      width: 55px; }
-    .featureRequest-actions > ul li div input {
-      border: none;
-      width: 100%;
-      padding: 0px;
-      margin: 0px; }
   .featureRequest-actions > ul > li {
     margin-left: 5px;
     margin-top: 5px; }
@@ -129,6 +133,8 @@
     list-style: none;
     width: 65px;
     height: auto;
+    position: absolute;
+    left: -9999px;
     top: 0; }
     .featureRequest-actions > ul ul li {
       padding-left: 3px;
@@ -265,7 +271,7 @@
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ededed',     endColorstr='#ffffff',     GradientType=0   );
     color: #999999; }
 
-.featureRequest-actions > ul li div {
+.featureRequest-actions > ul li input[type=submit] {
   display: inline-block;
   outline: none;
   cursor: pointer;
@@ -297,12 +303,12 @@
   border: solid 1px #b7b7b7;
   font-size: 12px;
   padding: .4em 1.5em .42em; }
-  .featureRequest-actions > ul li div:hover {
+  .featureRequest-actions > ul li input[type=submit]:hover {
     text-decoration: none; }
-  .featureRequest-actions > ul li div:active {
+  .featureRequest-actions > ul li input[type=submit]:active {
     position: relative;
     top: 1px; }
-  .featureRequest-actions > ul li div:hover {
+  .featureRequest-actions > ul li input[type=submit]:hover {
     /* FF3.6+ */
     background: -moz-linear-gradient(top, #ffffff 0%, #dcdcdc 100%);
     /* Chrome,Safari4+ */
@@ -318,7 +324,7 @@
     /* IE6-9 */
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff',     endColorstr='#dcdcdc',     GradientType=0   );
     color: #606060; }
-  .featureRequest-actions > ul li div:active {
+  .featureRequest-actions > ul li input[type=submit]:active {
     /* FF3.6+ */
     background: -moz-linear-gradient(top, #ededed 0%, #ffffff 100%);
     /* Chrome,Safari4+ */
