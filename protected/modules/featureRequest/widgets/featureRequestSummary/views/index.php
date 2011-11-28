@@ -12,6 +12,52 @@
     </div>
 
     <div class="featureRequest-actions">
+      <?php $this->widget('PostMenu',array(
+        'items'=>array(
+          array(
+            'label' => 'Vote',
+            'items' => array(
+              array(
+                'label'   => '1 vote',
+                'method'  => PostMenu::POST,
+                'url'     => array(
+                  'route',
+                  array(
+                    'featureRequestId'  => $this->model->id,
+                    'voteWeight'        => 1,
+                  ),
+                ),
+              ),
+              array(
+                'label'   => '2 votes',
+                'method'  => PostMenu::POST,
+                'url'     => array(
+                  'route',
+                  array(
+                    'featureRequestId'  => $this->model->id,
+                    'voteWeight'        => 2,
+                  ),
+                ),
+              ),
+              array(
+                'label'   => '3 votes',
+                'method'  => PostMenu::POST,
+                'url'     => array(
+                  'route',
+                  array(
+                    'featureRequestId'  => $this->model->id,
+                    'voteWeight'        => 3,
+                  ),
+                ),
+              ),
+          )),
+          array('label'=>'Admin', 'items'=>array(
+            array('label'=>'Accept' , 'url'=>array('')),
+            array('label'=>'Reject', 'url'=>array('')),
+          )),
+        )
+      )); ?>
+      <!--
       <?php $this->widget('zii.widgets.CMenu',array(
         'items'=>array(
           array('label'=>'Vote', 'items'=>array(
@@ -25,6 +71,7 @@
           )),
         )
       )); ?>
+      -->
     </div>
 
   </div>

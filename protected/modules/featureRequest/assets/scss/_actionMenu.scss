@@ -27,9 +27,9 @@
 
     @include border-radius( 5px, 5px, 5px, 5px );
 
-    a
+    a,
+    input
     {
-      display:         block;
       float:           left;
       width:           $menuWidth;
       height:          3em;  /* make the menu entries bigger */
@@ -42,8 +42,8 @@
       display:      block;
       float:        left;
       width:        $menuWidth - 10px;
-      height:       3em;  /* make the menu entries bigger */
-      line-height:  3em;  /* and center them vertically */
+      height:       2em;  /* make the menu entries bigger */
+      line-height:  2em;  /* and center them vertically */
       text-align:   center;
     }
 
