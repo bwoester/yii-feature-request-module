@@ -41,6 +41,12 @@ class FeatureRequest extends BaseFeatureRequest
     ));
 	}
 
+	public function attributeLabels() {
+		return array_merge(parent::attributeLabels(), array(
+			'status' => Yii::t( 'app', 'Current status' ),
+		));
+	}
+
 	public function save($runValidation=true,$attributes=null)
 	{
     $retVal = false;

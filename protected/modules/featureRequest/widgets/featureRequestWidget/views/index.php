@@ -103,6 +103,11 @@
       ?>
     </div>
 
+    <div class="featureRequest-status-container">
+      <span class="label"><?php echo $this->model->getAttributeLabel( 'status' ); ?></span>
+      <span class="status"><?php echo $this->model->status; ?></span>
+    </div>
+
   </div>
 
 </div>

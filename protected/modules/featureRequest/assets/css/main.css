@@ -38,7 +38,10 @@
   float: left; }
 
 .featureRequest-main-area {
-  margin-left: 80px; }
+  margin-left: 75px; }
+  .featureRequest-main-area > * {
+    padding-left: 5px;
+    padding-right: 5px; }
 
 .featureRequest-votes {
   -webkit-border-top-left-radius: 5px;
@@ -340,3 +343,20 @@
     /* IE6-9 */
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ededed',     endColorstr='#ffffff',     GradientType=0   );
     color: #999999; }
+
+.featureRequest-status-container {
+  -webkit-border-top-left-radius: 5px;
+  -moz-border-radius-topleft: 5px;
+  border-top-left-radius: 5px;
+  -webkit-border-top-right-radius: 5px;
+  -moz-border-radius-topright: 5px;
+  border-top-right-radius: 5px;
+  -webkit-border-bottom-right-radius: 5px;
+  -moz-border-radius-bottomright: 5px;
+  border-bottom-right-radius: 5px;
+  -webkit-border-bottom-left-radius: 5px;
+  -moz-border-radius-bottomleft: 5px;
+  border-bottom-left-radius: 5px;
+  background-color: #EEE;
+  padding-top: 0.5em;
+  padding-bottom: 0.5em; }
