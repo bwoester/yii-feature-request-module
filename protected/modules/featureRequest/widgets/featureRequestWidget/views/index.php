@@ -85,11 +85,7 @@
       echo CHtml::link( $this->model->message->title, $this->model->getUrl() );
     ?></h3>
 
-    <div class="featureRequest-content"><?php
-      $this->beginWidget( 'CMarkdown', array('purifyOutput'=>true) );
-      echo $this->model->message->content;
-      $this->endWidget();
-    ?></div>
+    <div class="featureRequest-content"><?php echo $this->getContent(); ?></div>
 
     <div class="featureRequest-info">
       <?php

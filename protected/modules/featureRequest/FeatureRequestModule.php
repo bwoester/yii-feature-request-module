@@ -2,6 +2,7 @@
 
 class FeatureRequestModule extends CWebModule
 {
+  const COMP_TEXT_TRUNCATOR = 'textTruncator';
 
   /**
    * Constructor.
@@ -13,6 +14,7 @@ class FeatureRequestModule extends CWebModule
   public function __construct($id,$parent,$config=null)
   {
     $this->defaultController = 'features';
+    $this->setComponents( $this->getDefaultComponentsConfiguration() );
     parent::__construct( $id, $parent, $config );
   }
 
@@ -37,6 +39,7 @@ class FeatureRequestModule extends CWebModule
     $cs->registerCssFile(
       $am->publish( dirname(__FILE__) . '/assets/css/main.css' )
     );
+
 	}
 
 	public function beforeControllerAction($controller, $action)
@@ -50,4 +53,13 @@ class FeatureRequestModule extends CWebModule
 		else
 			return false;
 	}
+
+  private function getDefaultComponentsConfiguration()
+  {
+    return array(
+//      self::COMP_TEXT_TRUNCATOR => array(
+//        'class' => '_featureRequests.components.textTruncator.TextTruncator',
+//      ),
+    );
+  }
 }
