@@ -25,9 +25,9 @@
 /* rosy */
 /* green */
 /* pink */
-.featureRequest-summary {
+.featureRequest {
   margin-bottom: 20px; }
-  .featureRequest-summary:after {
+  .featureRequest:after {
     content: ".";
     display: block;
     height: 0;

@@ -1,5 +1,5 @@
 <?php
 
-$this->widget( 'featureRequests.widgets.featureRequestSummary.FeatureRequestSummary', array(
+$this->widget( 'featureRequests.widgets.featureRequestWidget.FeatureRequestWidget', array(
   'model' => $data,
 ));
