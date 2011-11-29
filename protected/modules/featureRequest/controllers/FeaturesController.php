@@ -38,12 +38,26 @@ class FeaturesController extends FeatureRequestsBaseController
 
   /////////////////////////////////////////////////////////////////////////////
 
-  public function actionSearch()
+  public function actionSearch( $term )
   {
-    $result = array(
-      'Improve User Interface',
-      'Add User Profiles',
+    $aFeatureRequests = FeatureRequest::model()->findAll(
+      array(
+        'condition' => 'message.title like :title',
+        'limit'     => 10,
+        'order'     => 'message.title',
+        'params'    => array(
+          ':title' => '%' . $term . '%',
+        ),
+        'with'      => 'message',
+      )
     );
+
+    $result = array();
+    
+    /* @var $featureRequest FeatureRequest */
+    foreach ($aFeatureRequests as $featureRequest) {
+      $result[] = $featureRequest->message->title;
+    }
     
     echo CJSON::encode( $result );
   }
