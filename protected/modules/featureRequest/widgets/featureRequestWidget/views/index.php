@@ -14,69 +14,7 @@ $user = Yii::app()->user;
     </div>
 
     <div class="featureRequest-actions">
-      <?php $this->widget('PostMenu',array(
-        'items'=>array(
-          array(
-            'label' => 'Vote',
-            'items' => array(
-              array(
-                'label'   => '1 vote',
-                'method'  => PostMenu::POST,
-                'url'     => array(
-                  'features/vote',
-                  array(
-                    'featureRequestId'  => $this->model->id,
-                    'voteWeight'        => 1,
-                  ),
-                ),
-              ),
-              array(
-                'label'   => '2 votes',
-                'method'  => PostMenu::POST,
-                'url'     => array(
-                  'features/vote',
-                  array(
-                    'featureRequestId'  => $this->model->id,
-                    'voteWeight'        => 2,
-                  ),
-                ),
-              ),
-              array(
-                'label'   => '3 votes',
-                'method'  => PostMenu::POST,
-                'url'     => array(
-                  'features/vote',
-                  array(
-                    'featureRequestId'  => $this->model->id,
-                    'voteWeight'        => 3,
-                  ),
-                ),
-              ),
-          )),
-          array('label'=>'Admin', 'items'=>array(
-            array(
-              'label'   => 'Accept',
-              'method'  => PostMenu::POST,
-              'url'     => array(
-                'route',
-                array(
-                  'featureRequestId'  => $this->model->id,
-                ),
-              ),
-            ),
-            array(
-              'label'   => 'Reject',
-              'method'  => PostMenu::POST,
-              'url'     => array(
-                'route',
-                array(
-                  'featureRequestId'  => $this->model->id,
-                ),
-              ),
-            ),
-          )),
-        )
-      )); ?>
+      <?php echo $this->getMenu(); ?>
     </div>
 
   </div>

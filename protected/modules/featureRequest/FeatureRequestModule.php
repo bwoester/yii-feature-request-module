@@ -8,6 +8,8 @@ class FeatureRequestModule extends CWebModule
   const AUTH_FEATUREREQUEST_VOTE          = 'FeatureRequest.vote';
   const AUTH_FEATUREREQUEST_CHANGE_STATUS = 'FeatureRequest.changeStatus';
 
+  public $maxVoteWeight = 3;
+
   /**
    * Constructor.
    * @param string $id the ID of this module
@@ -44,6 +46,7 @@ class FeatureRequestModule extends CWebModule
       $am->publish( dirname(__FILE__) . '/assets/css/main.css' )
     );
 
+    Vote::$maxWeight = $this->maxVoteWeight;
 	}
 
 	public function beforeControllerAction($controller, $action)

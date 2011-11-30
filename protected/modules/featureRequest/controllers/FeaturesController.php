@@ -74,6 +74,8 @@ class FeaturesController extends FeatureRequestsBaseController
 
     if ($vote->save()) {
       Yii::app()->user->setFlash( 'success', 'Your vote has been saved.' );
+    } else {
+      Yii::app()->user->setFlash( 'error', 'Failed to save your vote.' );
     }
 
     // display the feature request detail view after voting

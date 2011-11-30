@@ -4,7 +4,7 @@ Yii::import( '_featureRequests.models._base.BaseVote', true );
 
 class Vote extends BaseVote
 {
-  protected $maxWeight = 3;
+  public static $maxWeight = 3;
 
   /**
    * @param string $className
@@ -24,7 +24,7 @@ class Vote extends BaseVote
 	public function rules()
   {
 		return array_merge( parent::rules(), array(
-			array('weight', 'numerical', 'integerOnly'=>true, 'min'=>1, 'max'=>$this->maxWeight ),
+			array('weight', 'numerical', 'integerOnly'=>true, 'min'=>1, 'max'=>self::$maxWeight ),
 		));
 	}
 
@@ -61,7 +61,7 @@ class Vote extends BaseVote
   {
     $retVal = array();
 
-    for ($i = 1; $i <= $this->maxWeight; $i++) {
+    for ($i = 1; $i <= self::$maxWeight; $i++) {
       $retVal[$i] = $i;
     }
 

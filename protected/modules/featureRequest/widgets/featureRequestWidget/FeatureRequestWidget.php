@@ -38,4 +38,32 @@ class FeatureRequestWidget extends CInputWidget
 
     return $retVal;
   }
+
+  public function getMenu()
+  {
+    $voteItems = array();
+    for ($i = 1; $i <= Vote::$maxWeight; $i++)
+    {
+      $voteItems[] = array(
+        'label'   => $i === 1 ? '1 vote' : "$i votes",
+        'method'  => PostMenu::POST,
+        'url'     => array(
+          'features/vote',
+          array( 'featureRequestId' => $this->model->id, 'voteWeight' => $i ),
+        ),
+      );
+    }
+
+    $retVal = $this->widget( 'PostMenu', array(
+      'items'=>array(
+        array(
+          'label' => 'Vote',
+          'items' => $voteItems,
+        ),
+      ),
+    ), true );
+
+    return $retVal;
+  }
+
 }

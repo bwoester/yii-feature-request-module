@@ -35,6 +35,7 @@ return array(
     'featureRequests'=>array(
       'class'=>'application.modules.featureRequest.featureRequestModule',
       'layout'=>'//layouts/column1',
+      // 'maxVoteWeight'=>5,
     ),
     'user',
     'srbac'     => array(
