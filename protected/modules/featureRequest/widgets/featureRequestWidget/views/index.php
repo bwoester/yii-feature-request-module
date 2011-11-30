@@ -1,5 +1,7 @@
 <?php
 /* @var $this FeatureRequestWidget */
+/* @var $user CWebUser */
+$user = Yii::app()->user;
 ?>
 
 <div class="featureRequest">
@@ -100,8 +102,22 @@
     </div>
 
     <div class="featureRequest-status-container">
+    <?php if ($user->checkAccess(FeatureRequestModule::AUTH_FEATUREREQUEST_CHANGE_STATUS)): ?>
+    <?php
+      echo CHtml::beginForm( $this->updateUrl );
+      echo CHtml::activeHiddenField( $this->model, 'id' );
+
+      echo CHtml::activeLabel( $this->model, 'status' );
+      echo CHtml::activeDropDownList( $this->model, 'status', $this->model->getStatusListData());
+      
+      echo CHtml::submitButton( "Change" );
+
+      echo CHtml::endForm();
+    ?>
+    <?php else: ?>
       <span class="label"><?php echo $this->model->getAttributeLabel( 'status' ); ?></span>
       <span class="status"><?php echo $this->model->status; ?></span>
+    <?php endif; ?>
     </div>
 
   </div>

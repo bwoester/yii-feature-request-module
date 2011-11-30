@@ -15,6 +15,7 @@ class FeatureRequestWidget extends CInputWidget
   const MODE_NORMAL  = 1;
 
   public $displayMode = self::MODE_NORMAL;
+  public $updateUrl = '';
 
   public function run()
   {

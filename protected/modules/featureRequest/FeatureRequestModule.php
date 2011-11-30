@@ -2,7 +2,11 @@
 
 class FeatureRequestModule extends CWebModule
 {
-  const COMP_TEXT_TRUNCATOR = 'textTruncator';
+  // const COMP_TEXT_TRUNCATOR = 'textTruncator';
+
+  const AUTH_FEATUREREQUEST_CREATE        = 'FeatureRequest.create';
+  const AUTH_FEATUREREQUEST_VOTE          = 'FeatureRequest.vote';
+  const AUTH_FEATUREREQUEST_CHANGE_STATUS = 'FeatureRequest.changeStatus';
 
   /**
    * Constructor.

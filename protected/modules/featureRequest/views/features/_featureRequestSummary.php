@@ -5,4 +5,5 @@ Yii::import( 'featureRequests.widgets.featureRequestWidget.FeatureRequestWidget'
 $this->widget( 'featureRequests.widgets.featureRequestWidget.FeatureRequestWidget', array(
   'model'       => $data,
   'displayMode' => FeatureRequestWidget::MODE_SUMMARY,
+  'updateUrl'   => array( 'features/update' ),
 ));

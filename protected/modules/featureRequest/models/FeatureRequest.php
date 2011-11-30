@@ -9,7 +9,11 @@ Yii::import( '_featureRequests.models._base.BaseFeatureRequest', true );
  */
 class FeatureRequest extends BaseFeatureRequest
 {
-  const STATUS_NEW = 'NEW';
+  const STATUS_NEW        = 'NEW';
+  const STATUS_ACCEPTED   = 'ACCEPTED';
+  const STATUS_REJECTED   = 'REJECTED';
+  const STATUS_WORKING_ON = 'WORKING_ON';
+  const STATUS_COMPLETED  = 'COMPLETED';
   
   /**
    * @param string $className
@@ -102,5 +106,20 @@ class FeatureRequest extends BaseFeatureRequest
 
     return $vote;
   }
-  
+
+  /////////////////////////////////////////////////////////////////////////////
+
+  public function getStatusListData()
+  {
+    return array(
+      self::STATUS_NEW        => self::STATUS_NEW,
+      self::STATUS_ACCEPTED   => self::STATUS_ACCEPTED,
+      self::STATUS_REJECTED   => self::STATUS_REJECTED,
+      self::STATUS_WORKING_ON => self::STATUS_WORKING_ON,
+      self::STATUS_COMPLETED  => self::STATUS_COMPLETED,
+    );
+  }
+
+  /////////////////////////////////////////////////////////////////////////////
+
 }

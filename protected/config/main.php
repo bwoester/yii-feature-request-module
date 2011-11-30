@@ -36,7 +36,11 @@ return array(
       'class'=>'application.modules.featureRequest.featureRequestModule',
       'layout'=>'//layouts/column1',
     ),
-    'user'
+    'user',
+    'srbac'     => array(
+      'debug'   => true,
+      'userid'  => 'id',
+    )
 	),
 
 	// application components
@@ -46,18 +50,14 @@ return array(
 			'allowAutoLogin'=>true,
       'loginUrl' => array('/user/login'),
 		),
-		// uncomment the following to enable URLs in path-format
-		/*
-		'urlManager'=>array(
-			'urlFormat'=>'path',
-			'rules'=>array(
-				'<controller:\w+>/<id:\d+>'=>'<controller>/view',
-				'<controller:\w+>/<action:\w+>/<id:\d+>'=>'<controller>/<action>',
-				'<controller:\w+>/<action:\w+>'=>'<controller>/<action>',
-			),
-		),
-		*/
-		'db'=>array(
+    'authManager'=>array(
+      'class'           => 'system.web.auth.CDbAuthManager',
+      'connectionID'    => 'db',
+      'assignmentTable' => 'auth_assignment',
+      'itemChildTable'  => 'auth_item_child',
+      'itemTable'       => 'auth_item',
+    ),
+    'db'=>array(
 			'connectionString' => 'mysql:host=localhost;dbname=yii_feature_request',
 			'emulatePrepare' => true,
 			'username' => 'root',
@@ -80,12 +80,6 @@ return array(
 				array(
 					'class'=>'CProfileLogRoute',
 				),
-				// uncomment the following to show log messages on web pages
-				/*
-				array(
-					'class'=>'CWebLogRoute',
-				),
-				*/
 			),
 		),
 	),
