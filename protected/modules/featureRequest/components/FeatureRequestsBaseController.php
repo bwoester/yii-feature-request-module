@@ -12,4 +12,23 @@ class FeatureRequestsBaseController extends CController
     $this->layout = '/layouts/main';
   }
 
+  protected function checkParams( array $params, $global=null )
+  {
+    if ($global === null) {
+      $global = $_POST;
+    }
+    
+    foreach ( $params as $key => $value )
+    {
+      if (is_array($value)) {
+        $this->checkParams( array($key), $global );
+        $this->checkParams( $value, $global[$key] );
+      } else {
+        if (!isset($global[$value])) {
+          throw new CHttpException( 400, 'Your request is invalid.' );
+        }
+      }
+    }
+  }
+
 }

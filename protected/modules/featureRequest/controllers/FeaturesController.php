@@ -66,29 +66,19 @@ class FeaturesController extends FeatureRequestsBaseController
 
   public function actionVote()
   {
-    if (!isset($_POST['featureRequestId']) || !isset($_POST['voteWeight'])) {
-      throw new CHttpException( 400, 'Your request is invalid.' );
-    }
+    $this->checkParams( array('featureRequestId', 'voteWeight') );
+    $featureRequest = $this->loadFeatureRequest( $_POST['featureRequestId'] );
 
-    $featureRequest = FeatureRequest::model()->findByPk( $_POST['featureRequestId'] );
+    $vote = $featureRequest->userVote;
+    $vote->weight = $_POST['voteWeight'];
 
-    if ($featureRequest instanceof FeatureRequest)
-    {
-      $vote = $featureRequest->userVote;
-      $vote->weight = $_POST['voteWeight'];
-      
-      if ($vote->save()) {
-        Yii::app()->user->setFlash( 'voted', 'Your vote has been saved.' );
-      }
-    }
-    else {
-      throw new CHttpException( 404, 'Feature request not found.' );
+    if ($vote->save()) {
+      Yii::app()->user->setFlash( 'success', 'Your vote has been saved.' );
     }
 
     // display the feature request detail view after voting
     $this->render( 'show', array(
       'featureRequest'  => $featureRequest,
-      'vote'            => $vote,
     ));
   }
 
@@ -131,7 +121,7 @@ class FeaturesController extends FeatureRequestsBaseController
         if ($valid)
         {
           $transaction->commit();
-          Yii::app()->user->setFlash( 'featureRequestCreated', 'Your feature request has been saved.' );
+          Yii::app()->user->setFlash( 'success', 'Your feature request has been saved.' );
           $this->redirect( $featureRequest->getUrl() );
         }
         else
@@ -157,6 +147,44 @@ class FeaturesController extends FeatureRequestsBaseController
       'vote' => $vote,
     ));
   }
+
+  /////////////////////////////////////////////////////////////////////////////
+
+  public function actionUpdate()
+  {
+    $this->checkParams(array(
+      'FeatureRequest' => array( 'id' ),
+    ));
+
+    $featureRequest = $this->loadFeatureRequest( $_POST['FeatureRequest']['id'] );
+    $featureRequest->attributes = $_POST['FeatureRequest'];
+
+    if ($featureRequest->save()) {
+      Yii::app()->user->setFlash( 'success', 'Feature request has been updated.' );
+    }
+
+    // display the feature request detail view after voting
+    $this->render( 'show', array(
+      'featureRequest'  => $featureRequest,
+    ));
+  }
+
+  /////////////////////////////////////////////////////////////////////////////
+
+  /**
+   * @param int $id
+   * @return FeatureRequest
+   */
+	public function loadFeatureRequest( $id )
+	{
+    $model = FeatureRequest::model()->findByPk( $id );
+
+    if ($model === null) {
+      throw new CHttpException( 404, 'Feature request not found.' );
+		}
+
+		return $model;
+	}
 
   /////////////////////////////////////////////////////////////////////////////
 

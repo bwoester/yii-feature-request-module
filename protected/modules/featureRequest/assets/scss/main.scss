@@ -2,68 +2,75 @@
 @import "borderRadius";
 @import "button";
 
-.featureRequest {
-  margin-bottom: 20px;  
-
-  &:after {
-    content: ".";
-    display: block;
-    height: 0;
-    clear: both;
-    visibility: hidden;
+#featureRequestContainer
+{
+  input[type="submit"]
+  {
+    @include button( white, small );
+    padding-top: 3px;
+    padding-bottom: 3px;
   }
-}
+  
+  .featureRequest {
+    margin-bottom: 20px;
 
-.featureRequest-sidebar {
-  float: left;
-}
-
-.featureRequest-main-area {
-  margin-left: 75px;
-
-  > * {
-    padding-left:   5px;
-    padding-right:  5px;
-  }
-}
-
-.featureRequest-votes {
-  @include border-radius( 5px, 5px, 5px, 5px );
-  display: inline-block;
-  border: 1px solid #CCC;
-  min-width: 63px;
-  text-align: center;
-  padding-top: 3px;
-  padding-bottom: 3px;
-  margin-bottom: 10px;
-
-  .counter {
-    display: block;
-    font-size: 1.8em;
-    font-weight: bold;
+    &:after {
+      content: ".";
+      display: block;
+      height: 0;
+      clear: both;
+      visibility: hidden;
+    }
   }
 
-  .label {
-    display: block;
-    font-size: 0.7em;
+  .featureRequest-sidebar {
+    float: left;
   }
-}
 
-.featureRequest-actions > ul {
-  @include actionMenu;
-}
+  .featureRequest-main-area {
+    margin-left: 75px;
 
-.featureRequest-actions > ul li a {
-  @include button( white, medium );
-}
+    > * {
+      padding-left:   5px;
+      padding-right:  5px;
+    }
+  }
 
-.featureRequest-actions > ul li input[type=submit] {
-  @include button( white, medium );
-}
+  .featureRequest-votes {
+    @include border-radius( 5px, 5px, 5px, 5px );
+    display: inline-block;
+    border: 1px solid #CCC;
+    min-width: 63px;
+    text-align: center;
+    padding-top: 3px;
+    padding-bottom: 3px;
+    margin-bottom: 10px;
 
-.featureRequest-status-container {
-  @include border-radius( 5px, 5px, 5px, 5px );
-  background-color: #EEE;
-  padding-top:    0.5em;
-  padding-bottom: 0.5em;
+    .counter {
+      display: block;
+      font-size: 1.8em;
+      font-weight: bold;
+    }
+
+    .label {
+      display: block;
+      font-size: 0.7em;
+    }
+  }
+
+  .featureRequest-actions > ul {
+    @include actionMenu;
+  }
+
+  .featureRequest-actions input[type="submit"]
+  {
+    @include button( white, medium );
+  }
+
+  .featureRequest-status-container {
+    @include border-radius( 5px, 5px, 5px, 5px );
+    background-color: #EEE;
+    padding-top:    0.5em;
+    padding-bottom: 0.5em;
+  }
 }
