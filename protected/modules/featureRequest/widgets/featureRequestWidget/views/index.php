@@ -105,10 +105,13 @@ $user = Yii::app()->user;
     <?php if ($user->checkAccess(FeatureRequestModule::AUTH_FEATUREREQUEST_CHANGE_STATUS)): ?>
     <?php
       echo CHtml::beginForm( $this->updateUrl );
-      echo CHtml::activeHiddenField( $this->model, 'id' );
+      echo CHtml::activeHiddenField( $this->model, 'id', array('id'=>false) );
 
-      echo CHtml::activeLabel( $this->model, 'status' );
-      echo CHtml::activeDropDownList( $this->model, 'status', $this->model->getStatusListData());
+      // since we're generating many forms, we have to ensure we don't generate
+      // duplicate html element ids.
+      $ddlId = CHtml::activeId( $this->model, 'status' ) . '_' . $this->model->id;
+      echo CHtml::activeLabel( $this->model, 'status', array('for'=>$ddlId) );
+      echo CHtml::activeDropDownList( $this->model, 'status', $this->model->getStatusListData(), array('id'=>$ddlId) );
       
       echo CHtml::submitButton( "Change" );
 
