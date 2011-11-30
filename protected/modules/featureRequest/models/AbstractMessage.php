@@ -18,4 +18,14 @@ class AbstractMessage extends BaseAbstractMessage
     }
   }
 
+	public function rules() {
+		return array_merge( parent::rules(), array(
+		));
+	}
+
+  protected function beforeSave()
+  {
+    $this->title = CHtml::encode( $this->title );
+    return parent::beforeSave();
+  }
 }
