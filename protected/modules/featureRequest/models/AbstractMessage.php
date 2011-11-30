@@ -20,6 +20,7 @@ class AbstractMessage extends BaseAbstractMessage
 
 	public function rules() {
 		return array_merge( parent::rules(), array(
+      array( 'content', 'filter', 'filter' => array($obj=new CHtmlPurifier(),'purify') ),
 		));
 	}
 
