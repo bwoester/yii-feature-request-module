@@ -4,9 +4,9 @@ class FeatureRequestModule extends CWebModule
 {
   // const COMP_TEXT_TRUNCATOR = 'textTruncator';
 
-  const AUTH_FEATUREREQUEST_CREATE        = 'FeatureRequest.create';
-  const AUTH_FEATUREREQUEST_VOTE          = 'FeatureRequest.vote';
-  const AUTH_FEATUREREQUEST_CHANGE_STATUS = 'FeatureRequest.changeStatus';
+  const AUTH_OP_FEATUREREQUEST_CREATE        = 'FeatureRequest.create';
+  const AUTH_OP_FEATUREREQUEST_VOTE          = 'FeatureRequest.vote';
+  const AUTH_OP_FEATUREREQUEST_CHANGE_STATUS = 'FeatureRequest.changeStatus';
 
   public $maxVoteWeight = 3;
 
@@ -48,6 +48,57 @@ class FeatureRequestModule extends CWebModule
 
     Vote::$maxWeight = $this->maxVoteWeight;
 	}
+
+  /**
+   * Returns a list of authItems defined and used by this module.
+   * @param int $type - you can filter by auth item type by passing
+   *        CAuthItem::TYPE_OPERATION, CAuthItem::TYPE_ROLE or
+   *        CAuthItem::TYPE_TASK. For everything else, you'll get all
+   *        authItems.
+   * @return array - indexed by const name, values are the auth item names.
+   */
+  public static function getAuthItems( $type=null )
+  {
+    $reflect = new ReflectionClass(__CLASS__);
+    $aConstants = $reflect->getConstants();
+    $prefix = '';
+
+    switch ($type)
+    {
+    case CAuthItem::TYPE_OPERATION:
+        $prefix = 'AUTH_OP_';
+        break;
+    case CAuthItem::TYPE_ROLE:
+        $prefix = 'AUTH_RO_';
+        break;
+    case CAuthItem::TYPE_TASK:
+        $prefix = 'AUTH_TA_';
+        break;
+    }
+
+    $retVal = array();
+
+    if ($prefix === '')
+    {
+      foreach ($aConstants as $constName => $constValue)
+      {
+        if (strpos($constName,'AUTH_OP_') === 0 || strpos($constName,'AUTH_RO_') === 0 || strpos($constName,'AUTH_TA_') === 0) {
+          $retVal[$constName] = $constValue;
+        }
+      }
+    }
+    else
+    {
+      foreach ($aConstants as $constName => $constValue)
+      {
+        if (strpos($constName,$prefix) === 0) {
+          $retVal[$constName] = $constValue;
+        }
+      }
+    }
+
+    return $retVal;
+  }
 
 	public function beforeControllerAction($controller, $action)
 	{

@@ -40,7 +40,7 @@ $user = Yii::app()->user;
     </div>
 
     <div class="featureRequest-status-container">
-    <?php if ($user->checkAccess(FeatureRequestModule::AUTH_FEATUREREQUEST_CHANGE_STATUS)): ?>
+    <?php if ($user->checkAccess(FeatureRequestModule::AUTH_OP_FEATUREREQUEST_CHANGE_STATUS)): ?>
     <?php
       echo CHtml::beginForm( $this->updateUrl );
       echo CHtml::activeHiddenField( $this->model, 'id', array('id'=>false) );
