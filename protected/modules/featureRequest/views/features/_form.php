@@ -37,7 +37,7 @@ $form = $this->beginWidget('CActiveForm', array(
   <div class="row">
     <?php echo $form->labelEx($featureRequest->message,'content'); ?>
     <?php
-    $this->widget('_featureRequests.widgets.wymEditorWidget.WymEditorWidget',array(
+    $this->widget('_featureRequests.widgets.wymEditorWidget.EWYMeditor',array(
       'model'     => $featureRequest->message,
       'attribute' => 'content',
     ));
