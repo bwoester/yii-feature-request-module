@@ -36,12 +36,17 @@ $form = $this->beginWidget('CActiveForm', array(
 
   <div class="row">
     <?php echo $form->labelEx($featureRequest->message,'content'); ?>
-    <?php echo $form->textArea($featureRequest->message,'content',array('rows'=>6, 'cols'=>50)); ?>
+    <?php
+    $this->widget('_featureRequests.widgets.wymEditorWidget.WymEditorWidget',array(
+      'model'     => $featureRequest->message,
+      'attribute' => 'content',
+    ));
+    ?>
     <?php echo $form->error($featureRequest->message,'content'); ?>
   </div>
 
   <div class="row buttons">
-    <?php echo CHtml::submitButton( $featureRequest->isNewRecord ? 'Create' : 'Save' ); ?>
+    <?php echo CHtml::submitButton( $featureRequest->isNewRecord ? 'Create' : 'Save', array('id'=>'submitFeatureRequestForm') ); ?>
   </div>
 
 <?php $this->endWidget(); ?>
