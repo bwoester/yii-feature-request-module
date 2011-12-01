@@ -54,14 +54,8 @@ class FeaturesController extends FeatureRequestsBaseController
     }
     else if (strtolower($encode) === 'json')
     {
-//      $result = array();
-//
-//      /* @var $featureRequest FeatureRequest */
-//      foreach ($aFeatureRequests as $featureRequest) {
-//        $result[] = $featureRequest->message->title;
-//      }
-//
-      echo CJSON::encode( $dataProvider->getData() );
+      $data = $dataProvider->getData();
+      echo FRHelper::jsonEncode( $data, array('message') );
     }
   }
 

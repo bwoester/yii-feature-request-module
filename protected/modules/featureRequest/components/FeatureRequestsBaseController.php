@@ -12,6 +12,22 @@ class FeatureRequestsBaseController extends CController
     $this->layout = '/layouts/main';
   }
 
+  /**
+   * @return CClientScript
+   */
+  public function getClientScript()
+  {
+    return Yii::app()->clientScript;
+  }
+
+  /**
+   * @return CAssetManager
+   */
+  public function getAssetManager()
+  {
+    return Yii::app()->assetManager;
+  }
+
   protected function checkParams( array $params, $global=null )
   {
     if ($global === null) {

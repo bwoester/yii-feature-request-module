@@ -32,14 +32,31 @@ $this->beginContent( $this->getModule()->layout );
     $this->widget( '_featureRequests.widgets.searchOrCreateWidget.SearchOrCreateWidget', array(
       'createUrl' => array('features/create'),
       'searchUrl' => array('features/search'),
+      'viewUrl'   => array('features/view'),
+      'resultDisplay' => 'message.title',
+      'resultId' => 'id',
       'CJuiAutoComplete' => array(
+        'source'  => $this->createUrl( 'features/search', array('encode'=>'json') ),
         'name'    => 'term',
-        'source'  => $this->createUrl('features/search'),
         'options' => array(
           'showAnim'=>'fold',
         ),
       ),
     ));
+
+    $cs = $this->getClientScript();
+    $cs->registerScript('renderFeatureRequestSearchResult', '
+      jQuery("#searchFeatureRequestContainer .ui-autocomplete-input")
+        .data( "autocomplete" )
+        ._renderItem = function( ul, item )
+        {
+          return $( "<li></li>" )
+            .data( "item.autocomplete", item )
+            .append( "<a>" + item.message.title + "</a>" )
+            .appendTo( ul );
+        };
+    ');
+
   ?></div>
 
   <?php echo $content; ?>
