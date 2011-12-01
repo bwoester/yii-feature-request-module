@@ -96,6 +96,8 @@
     /* IE6-9 */
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ededed',     endColorstr='#ffffff',     GradientType=0   );
     color: #999999; }
+#featureRequestContainer #searchFeatureRequestContainer {
+  margin-bottom: 2em; }
 #featureRequestContainer .featureRequest {
   margin-bottom: 20px; }
   #featureRequestContainer .featureRequest:after {
