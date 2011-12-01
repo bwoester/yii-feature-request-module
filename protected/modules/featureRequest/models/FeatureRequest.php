@@ -109,6 +109,20 @@ class FeatureRequest extends BaseFeatureRequest
 
   /////////////////////////////////////////////////////////////////////////////
 
+	public function search()
+  {
+		$criteria = new CDbCriteria(array(
+      'with'  => 'message',
+    ));
+		$criteria->compare( 'message.title', $this->message->title, true);
+
+		return new CActiveDataProvider($this, array(
+			'criteria' => $criteria,
+		));
+	}
+
+  /////////////////////////////////////////////////////////////////////////////
+
   public function getStatusListData()
   {
     return array(

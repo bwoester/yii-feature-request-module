@@ -31,8 +31,9 @@ $this->beginContent( $this->getModule()->layout );
   <div id="searchFeatureRequestContainer"><?php
     $this->widget( '_featureRequests.widgets.searchOrCreateWidget.SearchOrCreateWidget', array(
       'createUrl' => array('features/create'),
+      'searchUrl' => array('features/search'),
       'CJuiAutoComplete' => array(
-        'name'    => 'featureRequestTitle',
+        'name'    => 'term',
         'source'  => $this->createUrl('features/search'),
         'options' => array(
           'showAnim'=>'fold',

@@ -38,28 +38,31 @@ class FeaturesController extends FeatureRequestsBaseController
 
   /////////////////////////////////////////////////////////////////////////////
 
-  public function actionSearch( $term )
+  public function actionSearch( $term, $encode=false )
   {
-    $aFeatureRequests = FeatureRequest::model()->findAll(
-      array(
-        'condition' => 'message.title like :title',
-        'limit'     => 10,
-        'order'     => 'message.title',
-        'params'    => array(
-          ':title' => '%' . $term . '%',
-        ),
-        'with'      => 'message',
-      )
-    );
+    $model = new FeatureRequest();
+    $model->message->title = $term;
 
-    $result = array();
-    
-    /* @var $featureRequest FeatureRequest */
-    foreach ($aFeatureRequests as $featureRequest) {
-      $result[] = $featureRequest->message->title;
+    /* @var $dataProvider CActiveDataProvider */
+    $dataProvider = $model->search();
+
+    if ($encode === false)
+    {
+      $this->render('searchResults', array(
+        'dataProvider' => $dataProvider,
+      ));
     }
-    
-    echo CJSON::encode( $result );
+    else if (strtolower($encode) === 'json')
+    {
+//      $result = array();
+//
+//      /* @var $featureRequest FeatureRequest */
+//      foreach ($aFeatureRequests as $featureRequest) {
+//        $result[] = $featureRequest->message->title;
+//      }
+//
+      echo CJSON::encode( $dataProvider->getData() );
+    }
   }
 
   /////////////////////////////////////////////////////////////////////////////
