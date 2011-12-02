@@ -32,7 +32,7 @@ $this->beginContent( $this->getModule()->layout );
     $this->widget( '_featureRequests.widgets.searchOrCreateWidget.SearchOrCreateWidget', array(
       'createUrl' => array('features/create'),
       'searchUrl' => array('features/search'),
-      'viewUrl'   => array('features/view'),
+      'viewUrl'   => array('features/show'),
       'resultDisplay' => 'message.title',
       'resultId' => 'id',
       'CJuiAutoComplete' => array(
