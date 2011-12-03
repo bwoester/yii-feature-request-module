@@ -27,6 +27,7 @@ class FeatureRequestsBaseController extends CController
   {
     return array(
       array( 'deny', 'users' => array('?') ),
+      array( 'deny' ),
     );
   }
 

@@ -14,8 +14,18 @@ class FeaturesController extends FeatureRequestsBaseController
     $accessRules = array_merge( array(
       array(
         'allow',
-        'actions' =>  array( 'index' ),
+        'actions' =>  array( 'index', 'search' /*, 'show'*/ ),
         'users'   =>  array( '*' ),
+      ),
+      array(
+        'allow',
+        'actions' =>  array( 'vote' ),
+        'users'   =>  array( '@' ),
+      ),
+      array(
+        'allow',
+        'actions' =>  array( 'update' ),
+        'roles'   =>  array( 'admin' ),
       ),
     ), parent::accessRules() );
 
