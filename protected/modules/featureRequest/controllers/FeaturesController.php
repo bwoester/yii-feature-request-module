@@ -151,20 +151,36 @@ class FeaturesController extends FeatureRequestsBaseController
 
   public function actionUpdate()
   {
-    $this->checkParams(array(
-      'FeatureRequest' => array( 'id' ),
-    ));
-
-    $featureRequest = $this->loadFeatureRequest( $_POST['FeatureRequest']['id'] );
-    $featureRequest->attributes = $_POST['FeatureRequest'];
-
-    if ($featureRequest->save()) {
-      Yii::app()->user->setFlash( 'success', 'Feature request has been updated.' );
+    $featureRequest = null;
+    
+    if (isset($_POST['featureRequestId']))
+    {
+      $featureRequest = $this->loadFeatureRequest( $_POST['featureRequestId'] );
     }
+    else
+    {
+      $this->checkParams(array(
+        'FeatureRequest' => array('id'),
+      ));      
 
-    // display the feature request detail view after voting
-    $this->render( 'show', array(
-      'featureRequest'  => $featureRequest,
+      $featureRequest = $this->loadFeatureRequest( $_POST['FeatureRequest']['id'] );
+      $featureRequest->attributes = $_POST['FeatureRequest'];
+      
+      if (isset($_POST['AbstractMessage'])) {
+        $featureRequest->message->attributes = $_POST['AbstractMessage'];  
+      }   
+      
+      if ($featureRequest->save())
+      {
+        Yii::app()->user->setFlash( 'success', 'Feature request has been updated.' );
+
+        // display the feature request detail view after updating
+        $this->redirect( array('show', 'id'=>$featureRequest->id) );
+      }
+    }
+    
+    $this->render( 'update', array(
+      'featureRequest' => $featureRequest,
     ));
   }
 

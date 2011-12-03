@@ -19,7 +19,14 @@ $form = $this->beginWidget('CActiveForm', array(
   <?php
     echo $form->errorSummary($featureRequest);
     echo $form->errorSummary($featureRequest->message);
-    echo $form->errorSummary($vote);
+    
+    if ($vote instanceof Vote) {
+      echo $form->errorSummary($vote);
+    }
+    
+    if (!$featureRequest->getIsNewRecord()) {
+      echo $form->hiddenField($featureRequest,'id');
+    }
   ?>
 
   <div class="row">
@@ -28,11 +35,13 @@ $form = $this->beginWidget('CActiveForm', array(
     <?php echo $form->error($featureRequest->message,'title'); ?>
   </div>
 
+  <?php if ($vote instanceof Vote): ?>
   <div class="row">
     <?php echo $form->labelEx($vote,'weight'); ?>
     <?php echo $form->dropDownList($vote, 'weight', $vote->listData()); ?>
     <?php echo $form->error($vote,'weight'); ?>
   </div>
+  <?php endif; ?>
 
   <div class="row">
     <?php echo $form->labelEx($featureRequest->message,'content'); ?>
