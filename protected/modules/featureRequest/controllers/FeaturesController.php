@@ -9,6 +9,21 @@ class FeaturesController extends FeatureRequestsBaseController
 
   /////////////////////////////////////////////////////////////////////////////
 
+  public function accessRules()
+  {
+    $accessRules = array_merge( array(
+      array(
+        'allow',
+        'actions' =>  array( 'index' ),
+        'users'   =>  array( '*' ),
+      ),
+    ), parent::accessRules() );
+
+    return $accessRules;
+  }
+
+  /////////////////////////////////////////////////////////////////////////////
+
   public function behaviors()
   {
     return array(

@@ -12,6 +12,24 @@ class FeatureRequestsBaseController extends CController
     $this->layout = '/layouts/main';
   }
 
+  public function filters()
+  {
+    return array(
+      'accessControl',
+    );
+  }
+
+  /**
+   * 
+   * @return array
+   */
+  public function accessRules()
+  {
+    return array(
+      array( 'deny', 'users' => array('?') ),
+    );
+  }
+
   /**
    * @return CClientScript
    */
