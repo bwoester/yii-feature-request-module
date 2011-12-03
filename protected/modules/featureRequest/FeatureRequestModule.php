@@ -5,8 +5,8 @@ class FeatureRequestModule extends CWebModule
   // const COMP_TEXT_TRUNCATOR = 'textTruncator';
 
   const AUTH_OP_FEATUREREQUEST_CREATE        = 'FeatureRequest.create';
+  const AUTH_OP_FEATUREREQUEST_UPDATE        = 'FeatureRequest.update';
   const AUTH_OP_FEATUREREQUEST_VOTE          = 'FeatureRequest.vote';
-  const AUTH_OP_FEATUREREQUEST_CHANGE_STATUS = 'FeatureRequest.changeStatus';
 
   public $maxVoteWeight = 3;
 

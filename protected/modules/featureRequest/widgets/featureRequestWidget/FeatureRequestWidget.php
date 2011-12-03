@@ -41,10 +41,24 @@ class FeatureRequestWidget extends CInputWidget
 
   public function getMenu()
   {
-    $voteItems = array();
+    $items = array(
+      $this->getVoteMenu(),
+      $this->getAdminMenu(),
+    );
+    
+    $items = array_filter( $items, array('MenuFilterHelper','removeEmpty') );
+
+    return $this->widget( 'PostMenu', array(
+      'items' => $items,
+    ), true );
+  }
+  
+  private function getVoteMenu()
+  {
+    $items = array();
     for ($i = 1; $i <= Vote::$maxWeight; $i++)
     {
-      $voteItems[] = array(
+      $items[] = array(
         'label'   => $i === 1 ? '1 vote' : "$i votes",
         'method'  => PostMenu::POST,
         'url'     => array(
@@ -53,17 +67,43 @@ class FeatureRequestWidget extends CInputWidget
         ),
       );
     }
-
-    $retVal = $this->widget( 'PostMenu', array(
-      'items'=>array(
-        array(
-          'label' => 'Vote',
-          'items' => $voteItems,
-        ),
-      ),
-    ), true );
-
-    return $retVal;
+  
+    return array(
+      'label' => 'Vote',
+      'items' => $items,
+    );
   }
 
+  
+  private function getAdminMenu()
+  {
+    /* @var $user CWebUser */
+    $user = Yii::app()->user;
+    $items = array();
+
+    if ($user->checkAccess(FeatureRequestModule::AUTH_OP_FEATUREREQUEST_UPDATE))
+    {
+      $items[] = array(
+        'label'   => 'Update',
+        'method'  => PostMenu::POST,
+        'url'     => array(
+          'features/update',
+          array( 'featureRequestId' => $this->model->id ),
+        ),
+      );      
+    }
+  
+    return array(
+      'label' => 'Admin',
+      'items' => $items,
+    );
+  }
+  
+}
+
+class MenuFilterHelper
+{
+  static public function removeEmpty( $item ) {
+    return is_array( $item ) && isset( $item['items'] ) && !empty( $item['items'] );
+  }
 }
