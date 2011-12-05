@@ -1,20 +1,23 @@
 <?php
 
+/* @var $cs CClientScript */
+$cs = Yii::app()->clientScript;
+
+/* @var $user CWebUser */
+$user = Yii::app()->user;
+
+$flashes = $user->getFlashes();
+
 /* @var $this FeatureRequestsBaseController */
 $this->beginContent( $this->getModule()->layout );
 
 ?>
 <div id="featureRequestContainer">
 
+  <?php if (!empty($flashes)): ?>
   <div class="featureRequest-flashes"><?php
-
-    /* @var $user CWebUser */
-    $user = Yii::app()->user;
-    /* @var $cs CClientScript */
-    $cs   = Yii::app()->clientScript;
-    
     $items = array();
-    foreach ($user->getFlashes() as $key => $flash) {
+    foreach ($flashes as $key => $flash) {
       $items[] = array( 'label' => $flash );
     }
 
@@ -27,19 +30,22 @@ $this->beginContent( $this->getModule()->layout );
     ');
 
   ?></div>
+  <?php endif; ?>
 
   <div id="searchFeatureRequestContainer"><?php
     $this->widget( '_featureRequests.widgets.searchOrCreateWidget.SearchOrCreateWidget', array(
-      'createUrl' => array('features/create'),
-      'searchUrl' => array('features/search'),
-      'viewUrl'   => array('features/show'),
+      'model'         => new AbstractMessage(),
+      'attribute'     => 'title',
+      'createUrl'     => array('features/create'),
+      'searchUrl'     => array('features/search'),
+      'viewUrl'       => array('features/show'),
       'resultDisplay' => 'message.title',
-      'resultId' => 'id',
-      'CJuiAutoComplete' => array(
+      'resultId'      => 'id',
+      'options' => array(
         'source'  => $this->createUrl( 'features/search', array('encode'=>'json') ),
         'name'    => 'term',
         'options' => array(
-          'showAnim'=>'fold',
+          'showAnim'  => 'fold',
         ),
       ),
     ));

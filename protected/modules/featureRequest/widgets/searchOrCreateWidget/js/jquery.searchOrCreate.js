@@ -2,7 +2,10 @@
  * @see "http://wiki.jqueryui.com/w/page/12138135/Widget%20factory"
  */
 (function( $ ) {
+
   $.widget( "mod_featureRequest.searchOrCreate", {
+
+    autocomplete: $.ui.autocomplete.prototype,
 
     // These options will be used as defaults
     options: {
@@ -11,6 +14,8 @@
 
     // Set up the widget
     _create: function() {
+      $(this.element).autocomplete( this.options );
+      //this.autocomplete._create();
     },
 
     // Use the _setOption method to respond to changes to options
@@ -30,7 +35,9 @@
       // In jQuery UI 1.8, you must invoke the destroy method from the base widget
       $.Widget.prototype.destroy.call( this );
     }
-  });
+
+  }); // $.widget( "mod_featureRequest.searchOrCreate", {
+
 }( jQuery ) );
 
 ///////////////////////////////////////////////////////////////////////////////

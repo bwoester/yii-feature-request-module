@@ -4,14 +4,14 @@
  * and open the template in the editor.
  */
 
-Yii::import( 'zii.widgets.jui.CJuiWidget', true );
+Yii::import( 'zii.widgets.jui.CJuiInputWidget', true );
 
 /**
  * Description of SearchOrCreateWidget
  *
  * @author Benjamin
  */
-class SearchOrCreateWidget extends CJuiWidget
+class SearchOrCreateWidget extends CJuiInputWidget
 {
   /**
    * options passed to CJuiAutoComplete
@@ -120,7 +120,28 @@ class SearchOrCreateWidget extends CJuiWidget
 
   public function run()
   {
-    $this->render('index');
+    // $this->render('index');
+
+		list($name,$id)=$this->resolveNameID();
+
+		if(isset($this->htmlOptions['id']))
+			$id=$this->htmlOptions['id'];
+		else
+			$this->htmlOptions['id']=$id;
+
+		if(isset($this->htmlOptions['name']))
+			$name=$this->htmlOptions['name'];
+
+		if($this->hasModel())
+			echo CHtml::activeTextField($this->model,$this->attribute,$this->htmlOptions);
+		else
+			echo CHtml::textField($name,$this->value,$this->htmlOptions);
+
+		$options  = CJavaScript::encode($this->options);
+		$js       = "jQuery('#{$id}').searchOrCreate($options);";
+		$cs       = Yii::app()->getClientScript();
+    
+		$cs->registerScript( __CLASS__.'#'.$id, $js );
   }
 
   /////////////////////////////////////////////////////////////////////////////
