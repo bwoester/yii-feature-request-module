@@ -3,18 +3,19 @@
  */
 (function( $ ) {
 
-  $.widget( "mod_featureRequest.searchOrCreate", {
+  $.widget( "mod_featureRequest.locationBar", {
 
-    autocomplete: $.ui.autocomplete.prototype,
+    // autocomplete: $.ui.autocomplete.prototype,
 
     // These options will be used as defaults
     options: {
+      autocomplete: {},
       clear: null
     },
 
     // Set up the widget
     _create: function() {
-      $(this.element).autocomplete( this.options );
+      $(this.element).autocomplete( this.options.autocomplete );
       //this.autocomplete._create();
     },
 
@@ -36,7 +37,7 @@
       $.Widget.prototype.destroy.call( this );
     }
 
-  }); // $.widget( "mod_featureRequest.searchOrCreate", {
+  }); // $.widget( "mod_featureRequest.locationBar", {
 
 }( jQuery ) );
 

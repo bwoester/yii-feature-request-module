@@ -3,7 +3,10 @@
 Yii::import( '_featureRequests.models._base.BaseVote', true );
 
 /**
+ * LazyLoadAbstractUserBehavior:
  * @method AbstractUser getAbstractUser
+ *
+ * ConfigurableBehavior:
  * @method mixed getConfigValue
  * @method void setModuleInstance
  */

@@ -8,6 +8,10 @@ Yii::import( '_featureRequests.components.textTruncator.TextTruncator' );
  * @author Benjamin
  *
  * @property FeatureRequest $model
+ *
+ * ConfigurableBehavior:
+ * @method mixed getConfigValue
+ * @method void setModuleInstance
  */
 class FeatureRequestWidget extends CInputWidget
 {

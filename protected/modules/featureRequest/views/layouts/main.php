@@ -33,19 +33,22 @@ $this->beginContent( $this->getModule()->layout );
   <?php endif; ?>
 
   <div id="searchFeatureRequestContainer"><?php
-    $this->widget( '_featureRequests.widgets.searchOrCreateWidget.SearchOrCreateWidget', array(
-      'model'         => new AbstractMessage(),
-      'attribute'     => 'title',
-      'createUrl'     => array('features/create'),
+    $this->widget( '_featureRequests.widgets.LocationBar.LocationBarWidget', array(
+      //'model'         => new AbstractMessage(),
+      //'attribute'     => 'title',
+      'name'          => 'term',
+      //'createUrl'     => array('features/create'),
       'searchUrl'     => array('features/search'),
-      'viewUrl'       => array('features/show'),
-      'resultDisplay' => 'message.title',
-      'resultId'      => 'id',
+      //'viewUrl'       => array('features/show'),
+      //'resultDisplay' => 'message.title',
+      //'resultId'      => 'id',
       'options' => array(
-        'source'  => $this->createUrl( 'features/search', array('encode'=>'json') ),
-        'name'    => 'term',
-        'options' => array(
-          'showAnim'  => 'fold',
+        'autocomplete'  => array(
+          'source'  => $this->createUrl( 'features/search', array('encode'=>'json') ),
+          'name'    => 'term',
+          'options' => array(
+            'showAnim'  => 'fold',
+          ),
         ),
       ),
     ));
