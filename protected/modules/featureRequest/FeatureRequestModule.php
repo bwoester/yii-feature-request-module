@@ -4,6 +4,8 @@ class FeatureRequestModule extends CWebModule
 {
   // const COMP_TEXT_TRUNCATOR = 'textTruncator';
 
+  const CFG_MAX_VOTE_WEIGHT = 'maxVoteWeight';
+
   const AUTH_OP_FEATUREREQUEST_CREATE        = 'FeatureRequest.create';
   const AUTH_OP_FEATUREREQUEST_UPDATE        = 'FeatureRequest.update';
   const AUTH_OP_FEATUREREQUEST_VOTE          = 'FeatureRequest.vote';
@@ -45,8 +47,6 @@ class FeatureRequestModule extends CWebModule
     $cs->registerCssFile(
       $am->publish( dirname(__FILE__) . '/assets/css/main.css' )
     );
-
-    Vote::$maxWeight = $this->maxVoteWeight;
 	}
 
   /**

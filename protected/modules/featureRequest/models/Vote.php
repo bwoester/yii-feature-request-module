@@ -2,10 +2,13 @@
 
 Yii::import( '_featureRequests.models._base.BaseVote', true );
 
+/**
+ * @method AbstractUser getAbstractUser
+ * @method mixed getConfigValue
+ * @method void setModuleInstance
+ */
 class Vote extends BaseVote
 {
-  public static $maxWeight = 3;
-
   /**
    * @param string $className
    * @return Vote
@@ -17,14 +20,18 @@ class Vote extends BaseVote
   public function behaviors()
   {
 		return array_merge( parent::behaviors(), array(
-      'lazyLoadAbstractUser' => 'LazyLoadAbstractUserBehavior',
+      'lazyLoadAbstractUser'  => 'LazyLoadAbstractUserBehavior',
+      'configurable'          => array(
+        'class'       => 'ConfigurableBehavior',
+        'moduleClass' => 'FeatureRequestModule',
+      ),
     ));
   }
 
 	public function rules()
   {
 		return array_merge( parent::rules(), array(
-			array('weight', 'numerical', 'integerOnly'=>true, 'min'=>1, 'max'=>self::$maxWeight ),
+			array('weight', 'numerical', 'integerOnly'=>true, 'min'=>1, 'max'=>$this->getMaxWeight() ),
 		));
 	}
 
@@ -57,11 +64,16 @@ class Vote extends BaseVote
     return $this;
   }
 
+  private function getMaxWeight()
+  {
+    return $this->getConfigValue( FeatureRequestModule::CFG_MAX_VOTE_WEIGHT );
+  }
+
   public function listData()
   {
     $retVal = array();
 
-    for ($i = 1; $i <= self::$maxWeight; $i++) {
+    for ($i = 1; $i <= $this->getMaxWeight(); $i++) {
       $retVal[$i] = $i;
     }
 

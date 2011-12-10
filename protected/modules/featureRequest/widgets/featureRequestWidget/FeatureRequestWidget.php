@@ -17,6 +17,22 @@ class FeatureRequestWidget extends CInputWidget
   public $displayMode = self::MODE_NORMAL;
   public $updateUrl = '';
 
+  public function behaviors()
+  {
+		return array(
+      'configurable'  => array(
+        'class'       => 'ConfigurableBehavior',
+        'moduleClass' => 'FeatureRequestModule',
+      ),
+    );
+  }
+
+  public function init()
+  {
+    parent::init();
+    $this->attachBehaviors( $this->behaviors() );
+  }
+
   public function run()
   {
     $this->render('index');
@@ -56,7 +72,7 @@ class FeatureRequestWidget extends CInputWidget
   private function getVoteMenu()
   {
     $items = array();
-    for ($i = 1; $i <= Vote::$maxWeight; $i++)
+    for ($i = 1; $i <= $this->getMaxVoteWeight(); $i++)
     {
       $items[] = array(
         'label'   => $i === 1 ? '1 vote' : "$i votes",
@@ -97,6 +113,11 @@ class FeatureRequestWidget extends CInputWidget
       'label' => 'Admin',
       'items' => $items,
     );
+  }
+
+  private function getMaxVoteWeight()
+  {
+    return $this->getConfigValue( FeatureRequestModule::CFG_MAX_VOTE_WEIGHT );
   }
   
 }
