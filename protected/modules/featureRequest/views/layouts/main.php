@@ -40,13 +40,14 @@ $this->beginContent( $this->getModule()->layout );
       //'createUrl'     => array('features/create'),
       'searchUrl'     => array('features/search'),
       //'viewUrl'       => array('features/show'),
-      //'resultDisplay' => 'message.title',
       //'resultId'      => 'id',
       'options' => array(
+        'displayAttribute' => 'message.title',
         'autocomplete'  => array(
-          'source'  => $this->createUrl( 'features/search', array('encode'=>'json') ),
-          'name'    => 'term',
-          'options' => array(
+          'autofocus' => true,
+          'source'    => $this->createUrl( 'features/search', array('encode'=>'json') ),
+          'name'      => 'term',
+          'options'   => array(
             'showAnim'  => 'fold',
           ),
         ),

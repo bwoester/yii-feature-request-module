@@ -9,14 +9,23 @@
 
     // These options will be used as defaults
     options: {
-      autocomplete: {},
+      autocomplete: {
+        focus: function(event, ui) {
+          var self = $(this).data( "locationBar" );
+          var hoveredText = self._getObjectAttribute( ui.item, self.options.displayAttribute );
+          var decoded = self._decode( hoveredText );
+          self.element.val( decoded );
+          return false;
+        }
+      },
+      displayAttribute: 'title',
       clear: null
     },
 
     // Set up the widget
     _create: function() {
-      $(this.element).autocomplete( this.options.autocomplete );
-      //this.autocomplete._create();
+      var self = this;
+      self.element.autocomplete( self.options.autocomplete );
     },
 
     // Use the _setOption method to respond to changes to options
@@ -29,6 +38,18 @@
 
       // In jQuery UI 1.8, you have to manually invoke the _setOption method from the base widget
       $.Widget.prototype._setOption.apply( this, arguments );
+    },
+
+    _decode: function( string ) {
+      return $("<div/>").html( string ).text();
+    },
+
+    _getObjectAttribute: function( obj, attrib ) {
+      var path = attrib.split(".");
+      for (var i = 0; i < path.length; i++) {
+        obj = obj[path[i]];
+      }
+      return obj;
     },
 
     // Use the destroy method to clean up any modifications your widget has made to the DOM

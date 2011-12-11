@@ -35,7 +35,7 @@ class LocationBarWidget extends CJuiInputWidget
    * Will be used on hovering the result items to update the autocomplete value
    * @var string
    */
-  // public $resultDisplay = '';
+  // public $displayAttribute = '';
 
   /**
    * Will be used on hovering the result items to update the autocomplete value
@@ -125,6 +125,13 @@ class LocationBarWidget extends CJuiInputWidget
 		if (isset($this->htmlOptions['name'])) {
 			$name = $this->htmlOptions['name'];
       unset( $this->htmlOptions['name'] );
+    }
+
+    if (!isset($this->options['autocomplete']['select']))
+    {
+//      $this->options['autocomplete']['focus'] = 'js:function( event, ui ) {
+//        $( "#project" ).trigger( "focus.locationBar", [event, ui] );
+//      }';
     }
 
     echo CHtml::beginForm( $this->searchUrl, 'GET', $this->htmlOptions );
