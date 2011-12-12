@@ -26,6 +26,13 @@
     _create: function() {
       var self = this;
       self.element.autocomplete( self.options.autocomplete );
+      self.element.data( "autocomplete" )
+        ._renderItem = function( ul, item ) {
+          return $( "<li></li>" )
+            .data( "item.autocomplete", item )
+            .append( "<a>" +  self._getObjectAttribute( item, self.options.displayAttribute ) + "</a>" )
+            .appendTo( ul );
+        };
     },
 
     // Use the _setOption method to respond to changes to options

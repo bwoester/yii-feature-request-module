@@ -54,19 +54,6 @@ $this->beginContent( $this->getModule()->layout );
       ),
     ));
 
-    $cs = $this->getClientScript();
-    $cs->registerScript('renderFeatureRequestSearchResult', '
-      jQuery("#searchFeatureRequestContainer .ui-autocomplete-input")
-        .data( "autocomplete" )
-        ._renderItem = function( ul, item )
-        {
-          return $( "<li></li>" )
-            .data( "item.autocomplete", item )
-            .append( "<a>" + item.message.title + "</a>" )
-            .appendTo( ul );
-        };
-    ');
-
   ?></div>
 
   <?php echo $content; ?>
