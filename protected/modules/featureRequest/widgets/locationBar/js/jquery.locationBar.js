@@ -19,6 +19,8 @@
         }
       },
       displayAttribute: 'title',
+      idAttribute: 'id',
+      viewUrl: '#',
       clear: null
     },
 
@@ -28,9 +30,11 @@
       self.element.autocomplete( self.options.autocomplete );
       self.element.data( "autocomplete" )
         ._renderItem = function( ul, item ) {
+          // TODO select events prevents normal behavior
+          var href = self.options.viewUrl + (self.options.viewUrl.indexOf('?') == -1 ? '?' : '&') + 'id=' + self._getObjectAttribute( item, self.options.idAttribute );
           return $( "<li></li>" )
             .data( "item.autocomplete", item )
-            .append( "<a>" +  self._getObjectAttribute( item, self.options.displayAttribute ) + "</a>" )
+            .append( '<a href="'+href+'">' +  self._getObjectAttribute( item, self.options.displayAttribute ) + "</a>" )
             .appendTo( ul );
         };
     },

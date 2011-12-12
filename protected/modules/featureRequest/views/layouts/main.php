@@ -39,10 +39,11 @@ $this->beginContent( $this->getModule()->layout );
       'name'          => 'term',
       //'createUrl'     => array('features/create'),
       'searchUrl'     => array('features/search'),
-      //'viewUrl'       => array('features/show'),
+      'viewUrl'       => array('features/show'),
       //'resultId'      => 'id',
       'options' => array(
-        'displayAttribute' => 'message.title',
+        'displayAttribute'  => 'message.title',
+        'idAttribute'       => 'id',
         'autocomplete'  => array(
           'autofocus' => true,
           'source'    => $this->createUrl( 'features/search', array('encode'=>'json') ),

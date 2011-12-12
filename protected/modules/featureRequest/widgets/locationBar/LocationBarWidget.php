@@ -29,7 +29,7 @@ class LocationBarWidget extends CJuiInputWidget
    * Route to the action that views one selected result
    * @var mixed string or array used to build route
    */
-  // public $viewUrl = '';
+  public $viewUrl = '';
 
   /**
    * Will be used on hovering the result items to update the autocomplete value
@@ -55,6 +55,8 @@ class LocationBarWidget extends CJuiInputWidget
     if (!isset($this->options['autocomplete'])) {
       $this->options['autocomplete'] = array();
     }
+
+    $this->options['viewUrl'] = CHtml::normalizeUrl( $this->viewUrl );
 
 //    if (!isset($this->autoCompleteOptions['options']['focus']))
 //    {
@@ -125,13 +127,6 @@ class LocationBarWidget extends CJuiInputWidget
 		if (isset($this->htmlOptions['name'])) {
 			$name = $this->htmlOptions['name'];
       unset( $this->htmlOptions['name'] );
-    }
-
-    if (!isset($this->options['autocomplete']['select']))
-    {
-//      $this->options['autocomplete']['focus'] = 'js:function( event, ui ) {
-//        $( "#project" ).trigger( "focus.locationBar", [event, ui] );
-//      }';
     }
 
     echo CHtml::beginForm( $this->searchUrl, 'GET', $this->htmlOptions );
