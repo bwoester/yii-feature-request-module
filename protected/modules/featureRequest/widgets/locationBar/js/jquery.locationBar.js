@@ -16,6 +16,9 @@
           var decoded = self._decode( hoveredText );
           self.element.val( decoded );
           return false;
+        },
+        select: function(event, ui) {
+          return true;
         }
       },
       displayAttribute: 'title',

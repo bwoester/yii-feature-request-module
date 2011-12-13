@@ -49,7 +49,13 @@ class LocationBarWidget extends CJuiInputWidget
 
   public function init()
   {
+    if (YII_DEBUG) {
+      $this->scriptUrl  = 'https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/';
+      $this->scriptFile = 'jquery-ui.js';
+    }
+    
     parent::init();
+    
     $this->publishAssets();
 
     if (!isset($this->options['autocomplete'])) {

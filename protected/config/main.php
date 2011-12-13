@@ -46,17 +46,37 @@ return array(
 
 	// application components
 	'components'=>array(
-		'user'=>array(
-			// enable cookie-based authentication
-			'allowAutoLogin'=>true,
-      'loginUrl' => array('/user/login'),
-		),
     'authManager'=>array(
       'class'           => 'system.web.auth.CDbAuthManager',
       'connectionID'    => 'db',
       'assignmentTable' => 'auth_assignment',
       'itemChildTable'  => 'auth_item_child',
       'itemTable'       => 'auth_item',
+    ),
+    'clientScript' => array(
+      'class'         => 'system.web.CClientScript',
+      'corePackages'  => array(
+        'jquery' => array(
+          'baseUrl' => null,  //unset the defaults
+          'js'      => null,
+          'depends' => array( 'jquery-1.7.1' ), //tell the component that it depends your package
+        ),
+        'jquery.ui' => array(
+          'baseUrl' => null,  //unset the defaults
+          'js'      => null,
+          'depends' => array( 'jquery', 'jquery.ui-1.8.16' ), //tell the component that it depends your package
+        ),
+      ),
+      'packages'  => array( //register your packages
+        'jquery-1.7.1'  => array(
+          'baseUrl' => 'http://code.jquery.com/',
+          'js'      => array( 'jquery-1.7.1.js' ),
+        ),
+        'jquery.ui-1.8.16'  => array(
+          'baseUrl' => 'https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/',
+          'js'      => array( 'jquery-ui.js' ),
+        ),
+      ),
     ),
     'db'=>array(
 			'connectionString' => 'mysql:host=localhost;dbname=yii_feature_request',
@@ -82,6 +102,11 @@ return array(
 					'class'=>'CProfileLogRoute',
 				),
 			),
+		),
+		'user'=>array(
+			// enable cookie-based authentication
+			'allowAutoLogin'=>true,
+      'loginUrl' => array('/user/login'),
 		),
 	),
 
