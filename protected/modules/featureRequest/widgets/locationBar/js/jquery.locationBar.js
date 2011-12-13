@@ -11,14 +11,22 @@
     options: {
       autocomplete: {
         focus: function(event, ui) {
-          var self = $(this).data( "locationBar" );
+          var self = $(this).data( 'locationBar' );
           var hoveredText = self._getObjectAttribute( ui.item, self.options.displayAttribute );
           var decoded = self._decode( hoveredText );
           self.element.val( decoded );
           return false;
         },
         select: function(event, ui) {
-          return true;
+          var self = $(this).data( 'locationBar' );
+          var hoveredText = self._getObjectAttribute( ui.item, self.options.displayAttribute );
+          var decoded = self._decode( hoveredText );
+          self.element.val( decoded );
+          self.element.next().val( 'View' );
+          // TODO: Create button should appear when user modifies editline value
+          //       It should disappear when a suggestion is selected.
+          self.element.next().after( '<input type="submit" value="Create" />' );
+          return false;
         }
       },
       displayAttribute: 'title',
@@ -33,11 +41,9 @@
       self.element.autocomplete( self.options.autocomplete );
       self.element.data( "autocomplete" )
         ._renderItem = function( ul, item ) {
-          // TODO select events prevents normal behavior
-          var href = self.options.viewUrl + (self.options.viewUrl.indexOf('?') == -1 ? '?' : '&') + 'id=' + self._getObjectAttribute( item, self.options.idAttribute );
           return $( "<li></li>" )
             .data( "item.autocomplete", item )
-            .append( '<a href="'+href+'">' +  self._getObjectAttribute( item, self.options.displayAttribute ) + "</a>" )
+            .append( '<a>' +  self._getObjectAttribute( item, self.options.displayAttribute ) + "</a>" )
             .appendTo( ul );
         };
     },
